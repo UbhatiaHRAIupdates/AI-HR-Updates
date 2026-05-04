@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence Brief — May 2026 · EY</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root{
+  --ink:#0D0D14;--paper:#F8F5EF;--gold:#B8922A;--gold-lt:#DDB96A;
+  --teal:#0F5F6B;--red:#B83232;--mid:#52526A;
+  --line:rgba(13,13,20,0.1);--ll:rgba(13,13,20,0.05);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;}
+
+/* ── TOP NAV ── */
+.top-bar{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  background:var(--ink);height:50px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+}
+.top-brand{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.06em;color:var(--gold-lt);}
+.top-right{display:flex;align-items:center;gap:1rem;}
+.top-date{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.3);}
+.top-btn{
+  font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--gold-lt);
+  padding:0.3rem 0.8rem;border:1px solid rgba(184,146,42,0.4);
+  background:none;cursor:pointer;border-radius:2px;
+}
+
+/* ── SECTION TABS (sticky below top bar) ── */
+.section-tabs{
+  position:sticky;top:50px;z-index:200;
+  background:white;border-bottom:2px solid var(--ink);
+  display:flex;overflow-x:auto;
+  scrollbar-width:none;
+}
+.section-tabs::-webkit-scrollbar{display:none;}
+.tab-btn{
+  font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;
+  text-transform:uppercase;white-space:nowrap;
+  padding:0.9rem 1.2rem;border:none;background:none;cursor:pointer;
+  color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;flex-shrink:0;
+}
+.tab-btn:hover{color:var(--ink);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── PANELS ── */
+.panel{display:none;animation:fadeIn .3s ease;}
+.panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── HERO ── */
+.hero{
+  background:var(--ink);padding:7rem 2.5rem 4rem;
+  position:relative;overflow:hidden;min-height:92vh;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero::before{content:'';position:absolute;top:-15%;right:-10%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,42,0.09),transparent 65%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-20%;left:-8%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(15,95,107,0.14),transparent 65%);pointer-events:none;}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;}
+.hero-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6.5vw,5.5rem);font-weight:700;line-height:1.02;color:#F8F5EF;max-width:860px;margin-bottom:1.4rem;}
+.hero h1 em{color:var(--gold-lt);font-style:italic;}
+.hero-desc{font-size:0.95rem;color:rgba(248,245,239,0.5);max-width:540px;line-height:1.8;margin-bottom:3rem;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:3rem;}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.07em;text-transform:uppercase;padding:0.3rem 0.8rem;border:1px solid rgba(184,146,42,0.3);color:rgba(248,245,239,0.5);border-radius:2px;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:2rem;border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;}
+.hm label{display:block;font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:0.3rem;}
+.hm span{font-size:0.82rem;color:rgba(255,255,255,0.65);}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1140px;margin:0 auto;padding:4rem 2rem;}
+.section-divider{border:none;border-top:1px solid var(--line);margin:0 2rem;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}
+.sl{font-size:0.92rem;color:var(--mid);max-width:660px;line-height:1.8;margin-bottom:2.5rem;}
+
+/* ── STAT GRID ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5px;background:var(--line);border:1px solid var(--line);margin-bottom:2rem;}
+.stat-card{background:white;padding:1.8rem 1.5rem;position:relative;overflow:hidden;}
+.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.stat-card:hover::after{transform:scaleX(1);}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:0.4rem;}
+.stat-l{font-size:0.78rem;color:var(--mid);line-height:1.5;}
+.stat-s{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:rgba(82,82,106,0.45);margin-top:0.6rem;}
+.stat-s a,.card-src a,.tl-src a,.pred-src a,.co-src a,.ind-src a,.dark-src a,.hr-src a{
+  color:var(--teal);text-decoration:underline;text-underline-offset:2px;opacity:0.85;
+  transition:opacity .15s;
+}
+.stat-s a:hover,.card-src a:hover,.tl-src a:hover,.pred-src a:hover,.co-src a:hover,.ind-src a:hover,.dark-src a:hover,.hr-src a:hover{
+  opacity:1;text-decoration:underline;
+}
+
+/* ── CARD GRIDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem;}
+.card{background:white;border:1px solid var(--line);padding:1.8rem;position:relative;transition:transform .2s,box-shadow .2s;}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(13,13,20,0.09);}
+.card-no{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:rgba(13,13,20,0.05);position:absolute;top:1rem;right:1.2rem;line-height:1;}
+.card-icon{font-size:1.4rem;margin-bottom:0.6rem;}
+.card-h{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;}
+.card-b{font-size:0.79rem;color:var(--mid);line-height:1.75;margin-bottom:0.8rem;}
+.card-src{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;color:rgba(82,82,106,0.42);}
+.card-src a{color:var(--teal) !important;text-decoration:none;font-weight:500;}
+.card-src a:hover{text-decoration:underline;}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:0.07em;text-transform:uppercase;padding:0.18rem 0.5rem;border:1px solid var(--line);color:var(--mid);margin:0.15rem;border-radius:2px;}
+
+/* ── CHART BOX ── */
+.chart-box{background:white;border:1px solid var(--line);padding:2rem;margin-bottom:2rem;}
+.chart-h{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;margin-bottom:0.3rem;}
+.chart-sub{font-family:'IBM Plex Mono',monospace;font-size:0.67rem;color:var(--mid);margin-bottom:1.6rem;}
+.bar-row{display:flex;align-items:center;gap:1rem;margin-bottom:0.8rem;}
+.bar-lbl{font-size:0.74rem;color:var(--ink);width:220px;flex-shrink:0;text-align:right;line-height:1.35;}
+.bar-track{flex:1;height:24px;background:rgba(13,13,20,0.04);border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:2px;display:flex;align-items:center;padding-left:0.6rem;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:white;transition:width 1.4s cubic-bezier(.16,1,.3,1);width:0;}
+.bf-g{background:linear-gradient(90deg,#B8922A,#DDB96A);}
+.bf-t{background:linear-gradient(90deg,#0F5F6B,#1A9AAF);}
+.bf-i{background:linear-gradient(90deg,#252535,#454565);}
+.bf-r{background:linear-gradient(90deg,#B83232,#D95050);}
+.bf-gr{background:linear-gradient(90deg,#2D7A3A,#4CAF60);}
+
+/* ── DARK SECTION ── */
+.dark-wrap{background:var(--ink);padding:4rem 2rem;}
+.dark-inner{max-width:1140px;margin:0 auto;}
+.dark-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-top:2rem;}
+.dark-card{background:var(--ink);padding:2rem 1.6rem;}
+.dark-stripe{width:28px;height:2px;background:var(--gold);margin-bottom:1.2rem;}
+.dark-card h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:#F8F5EF;margin-bottom:0.6rem;}
+.dark-card p{font-size:0.78rem;color:rgba(248,245,239,0.55);line-height:1.75;}
+.dark-stat{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--gold);margin-top:0.8rem;line-height:1;}
+.dark-lbl{font-size:0.68rem;color:rgba(248,245,239,0.35);margin-top:0.2rem;}
+.dark-src{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;color:rgba(248,245,239,0.2);margin-top:0.8rem;padding-top:0.6rem;border-top:1px solid rgba(255,255,255,0.07);}
+
+/* ── COMPANY CARDS ── */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5px;background:var(--line);border:1px solid var(--line);margin-bottom:2rem;}
+.co-card{background:white;padding:1.8rem;position:relative;overflow:hidden;}
+.co-accent{position:absolute;top:0;left:0;right:0;height:3px;}
+.co-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;margin-bottom:0.3rem;}
+.co-sub{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.06em;color:var(--mid);margin-bottom:1rem;}
+.co-desc{font-size:0.78rem;color:var(--mid);line-height:1.7;margin-bottom:1.2rem;border-left:2px solid var(--line);padding-left:0.8rem;}
+.co-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;}
+.co-sn{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;line-height:1;}
+.co-sl{font-size:0.68rem;color:var(--mid);line-height:1.4;}
+.co-pills{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.5rem;}
+.co-pill{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;padding:0.18rem 0.5rem;border:1px solid var(--line);color:var(--mid);border-radius:2px;}
+.co-src{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;color:rgba(82,82,106,0.4);margin-top:0.8rem;padding-top:0.6rem;border-top:1px solid var(--ll);}
+
+/* ── INDUSTRY DROPDOWN ── */
+.industry-shell{background:white;border:1px solid var(--line);margin-bottom:2rem;}
+.industry-select-bar{
+  display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;
+  border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.industry-select-bar label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);}
+.industry-select-bar select{
+  font-family:'IBM Plex Mono',monospace;font-size:0.72rem;
+  padding:0.5rem 1rem;border:1px solid var(--line);background:var(--paper);
+  color:var(--ink);cursor:pointer;border-radius:2px;
+}
+.industry-panel{display:none;padding:2rem 1.5rem;}
+.industry-panel.active{display:block;}
+.ind-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;}
+.ind-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;}
+.ind-badge{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;padding:0.3rem 0.8rem;border-radius:20px;color:white;}
+.ind-stats{display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;}
+.ind-stat{text-align:center;}
+.ind-stat-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;}
+.ind-stat-l{font-size:0.72rem;color:var(--mid);line-height:1.4;}
+.ind-body{font-size:0.82rem;color:var(--mid);line-height:1.75;margin-bottom:1rem;}
+.ind-bullets{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.ind-bullets li{font-size:0.8rem;color:var(--mid);padding-left:1rem;position:relative;line-height:1.6;}
+.ind-bullets li::before{content:'→';position:absolute;left:0;color:var(--gold);}
+.ind-src{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:rgba(82,82,106,0.4);margin-top:1rem;}
+
+/* ── JOBS TABLE ── */
+.jobs-table{width:100%;border-collapse:collapse;margin-bottom:2rem;font-size:0.78rem;}
+.jobs-table th{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-align:left;padding:0.7rem 0.9rem;border-bottom:2px solid var(--ink);background:var(--paper);}
+.jobs-table td{padding:0.75rem 0.9rem;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;background:white;}
+.jobs-table tr:last-child td{border-bottom:none;}
+.risk-hi{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:600;}
+.risk-md{color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;}
+.risk-lo{color:#2D7A3A;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;}
+.new-role{color:var(--teal);font-weight:600;}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),var(--teal),rgba(13,13,20,0.12));}
+.tl-item{position:relative;padding:0 0 2rem 2rem;}
+.tl-item::before{content:'';position:absolute;left:-5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--gold);border:2px solid var(--paper);}
+.tl-yr{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--gold);margin-bottom:0.3rem;}
+.tl-h{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;margin-bottom:0.4rem;}
+.tl-b{font-size:0.79rem;color:var(--mid);line-height:1.75;max-width:620px;}
+.tl-src{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;color:rgba(82,82,106,0.4);margin-top:0.3rem;}
+
+/* ── SOURCES ── */
+.sources-bg{background:#F0EDE6;padding:4rem 2rem;}
+.sources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem;}
+.src-item{background:white;padding:1.1rem 1.3rem;}
+.src-num{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:0.3rem;}
+.src-org{font-weight:600;font-size:0.8rem;margin-bottom:0.15rem;}
+.src-title{font-size:0.73rem;color:var(--mid);margin-bottom:0.35rem;line-height:1.4;}
+.src-link{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--teal);word-break:break-all;text-decoration:none;}
+.src-link:hover{text-decoration:underline;}
+.src-date{font-family:'IBM Plex Mono',monospace;font-size:0.56rem;color:rgba(82,82,106,0.45);margin-top:0.25rem;}
+
+/* ── SVG CHART ── */
+.svg-chart{width:100%;height:auto;}
+
+/* ── SUBHEADING BANNER ── */
+.sub-banner{display:inline-block;padding:0.5rem 1rem;margin:2rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:white;}
+
+/* ── STRATEGY TABLE ── */
+.strat-table{width:100%;border-collapse:collapse;margin-bottom:2rem;}
+.strat-table th{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-align:left;padding:0.7rem 0.9rem;border-bottom:2px solid var(--ink);background:var(--paper);}
+.strat-table td{padding:0.8rem 0.9rem;border-bottom:1px solid var(--line);font-size:0.79rem;color:var(--ink);vertical-align:top;line-height:1.6;background:white;}
+.strat-table tr:last-child td{border-bottom:none;}
+.strat-table td:first-child{font-weight:600;}
+.p-hi{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;}
+.p-md{color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:1.8rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:rgba(255,255,255,0.28);}
+footer strong{color:var(--gold-lt);}
+
+/* ── SCROLL TO TOP ── */
+.scroll-top{position:fixed;bottom:2rem;right:2rem;z-index:100;background:var(--ink);color:var(--gold-lt);border:1px solid rgba(184,146,42,0.3);width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+.scroll-top.visible{opacity:1;}
+
+/* ── PRED CARDS ── */
+.pred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-bottom:2rem;}
+.pred-card{border:1px solid var(--line);background:white;padding:1.8rem;position:relative;overflow:hidden;}
+.pred-yr{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:white;padding:0.22rem 0.65rem;border-radius:2px;display:inline-block;margin-bottom:0.8rem;}
+.pred-h{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;margin-bottom:0.45rem;}
+.pred-b{font-size:0.78rem;color:var(--mid);line-height:1.75;}
+.pred-stat{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--teal);margin-top:0.8rem;}
+.pred-src{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;color:rgba(82,82,106,0.4);margin-top:0.6rem;}
+.pred-wm{position:absolute;bottom:-0.5rem;right:0.5rem;font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:rgba(13,13,20,0.03);line-height:1;pointer-events:none;}
+
+/* ── SKILL BARS ── */
+.skill-row{display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:2rem;}
+.skill-col{flex:1;min-width:90px;display:flex;flex-direction:column;align-items:center;gap:0.4rem;}
+.skill-track{width:34px;height:100px;background:rgba(13,13,20,0.05);border-radius:3px;overflow:hidden;display:flex;flex-direction:column-reverse;}
+.skill-fill{background:linear-gradient(to top,#B8922A,#DDB96A);border-radius:3px;transition:height 1.5s cubic-bezier(.16,1,.3,1);height:0;}
+.skill-pct{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--ink);}
+.skill-lbl{font-size:0.67rem;color:var(--mid);text-align:center;line-height:1.35;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .top-bar .top-date{display:none;}
+  .wrap{padding:2.5rem 1rem;}
+  .dark-wrap{padding:2.5rem 1rem;}
+  .bar-lbl{width:130px;font-size:0.68rem;}
+  .co-grid{grid-template-columns:1fr;}
+  .hero{padding:6rem 1.2rem 3rem;}
+  .hero h1{font-size:2.2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-brand">AI Intelligence Brief</div>
+  <div class="top-right">
+    <div class="top-date">MAY 2026 · ED. 01</div>
+    <button class="top-btn" onclick="goto('src-panel')">Sources ↓</button>
+  </div>
+</div>
+
+<!-- SECTION TABS -->
+<div class="section-tabs" id="mainTabs">
+  <button class="tab-btn active" onclick="showTab('overview')">📊 Overview</button>
+  <button class="tab-btn" onclick="showTab('hr-ps')">🏢 AI in HR — Prof. Services</button>
+  <button class="tab-btn" onclick="showTab('talent')">🎯 Talent Acquisition</button>
+  <button class="tab-btn" onclick="showTab('lwd')">📚 Workforce Planning & L&D</button>
+  <button class="tab-btn" onclick="showTab('exp-perf')">⭐ Employee Experience & Performance</button>
+  <button class="tab-btn" onclick="showTab('firms')">🏛️ Big 4, MBB & IT Giants</button>
+  <button class="tab-btn" onclick="showTab('jobs')">⚖️ Jobs at Risk vs New Roles</button>
+  <button class="tab-btn" onclick="showTab('industry')">🏭 AI by Industry</button>
+  <button class="tab-btn" onclick="showTab('predictions')">🔮 Predictions 2030</button>
+  <button class="tab-btn" onclick="showTab('src-panel')">📎 Sources</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 1 — OVERVIEW
+═══════════════════════════════════════════════════════ -->
+<div id="overview" class="panel active">
+  <div class="hero">
+    <div class="hero-eyebrow">AI Intelligence Brief · EY Leadership Edition</div>
+    <h1>The <em>Agentic</em> Era:<br>AI's Defining<br>Shift 2025–26</h1>
+    <p class="hero-desc">A rigorous synthesis of the most trusted whitepapers on AI's trajectory — with company-level data, 7 focused lenses, and forward predictions to 2030. Use the tabs above to navigate any topic directly.</p>
+    <div class="hero-chips">
+      <div class="chip">WEF · McKinsey · Deloitte · PwC · Gartner · KPMG · EY</div>
+      <div class="chip">Accenture · BCG · Bain · TCS · Infosys · Salesforce</div>
+      <div class="chip">Dec 2025 – May 2026 · 23 Tier-1 Sources</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hm"><label>Prepared for</label><span>udit.bhatia@in.ey.com</span></div>
+      <div class="hm"><label>Edition</label><span>01 · May 2026</span></div>
+      <div class="hm"><label>Sections</label><span>9 Deep-Dives</span></div>
+      <div class="hm"><label>Frequency</label><span>Weekly</span></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="eyebrow">Macro Snapshot</div>
+    <h2 class="sh">Six Numbers That Define the AI Moment</h2>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">71%</div><div class="stat-l">Professional services firms with active GenAI implementation in 2024 — up from 33% in 2023</div><div class="stat-s"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey State of AI, Mar 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">76%</div><div class="stat-l">Employees using AI at work (2025), up from 30% in 2023 — a 2.5× increase in just two years</div><div class="stat-s"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey Future of Work, Apr 2026</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">78M</div><div class="stat-l">Net new jobs created globally by 2030 — 170M created, 92M displaced; 22% of formal jobs in churn</div><div class="stat-s"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">WEF Future of Jobs Report, Jan 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">$3T</div><div class="stat-l">Annual corporate productivity gains from agentic AI + 5.4% EBITDA improvement per company</div><div class="stat-s"><a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">KPMG Agentic AI Productivity Report 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">327%</div><div class="stat-l">Projected growth in agentic AI adoption within HR functions by 2027 — from 15% today to 64%</div><div class="stat-s"><a href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Salesforce CHRO Research, 2025 (200 global HR execs)</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">50%</div><div class="stat-l">Of current HR activities will be AI-automated or performed by AI agents by 2030</div><div class="stat-s"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner HR Practice Research 2026</a></a></div></div>
+    </div>
+
+    <!-- Adoption Trend Chart -->
+    <div class="chart-box">
+      <div class="chart-h">GenAI Adoption in Professional Services (2023–2026)</div>
+      <div class="chart-sub">% of firms with active GenAI implementation · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey State of AI 2025</a></a> · BPM Industry Outlook 2026</div>
+      <svg class="svg-chart" viewBox="0 0 760 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="85" y1="20" x2="85" y2="175" stroke="#e8e4dc" stroke-width="1"/>
+        <line x1="85" y1="175" x2="730" y2="175" stroke="#e8e4dc" stroke-width="1"/>
+        <line x1="85" y1="135" x2="730" y2="135" stroke="#e8e4dc" stroke-width="0.5" stroke-dasharray="5,5"/>
+        <line x1="85" y1="95" x2="730" y2="95" stroke="#e8e4dc" stroke-width="0.5" stroke-dasharray="5,5"/>
+        <line x1="85" y1="55" x2="730" y2="55" stroke="#e8e4dc" stroke-width="0.5" stroke-dasharray="5,5"/>
+        <text x="73" y="179" font-size="10" fill="#aaa" text-anchor="end" font-family="IBM Plex Mono,monospace">0%</text>
+        <text x="73" y="139" font-size="10" fill="#aaa" text-anchor="end" font-family="IBM Plex Mono,monospace">25%</text>
+        <text x="73" y="99" font-size="10" fill="#aaa" text-anchor="end" font-family="IBM Plex Mono,monospace">50%</text>
+        <text x="73" y="59" font-size="10" fill="#aaa" text-anchor="end" font-family="IBM Plex Mono,monospace">75%</text>
+        <text x="210" y="195" font-size="10" fill="#aaa" text-anchor="middle" font-family="IBM Plex Mono,monospace">2023</text>
+        <text x="370" y="195" font-size="10" fill="#aaa" text-anchor="middle" font-family="IBM Plex Mono,monospace">2024</text>
+        <text x="530" y="195" font-size="10" fill="#aaa" text-anchor="middle" font-family="IBM Plex Mono,monospace">2025</text>
+        <text x="690" y="195" font-size="10" fill="#aaa" text-anchor="middle" font-family="IBM Plex Mono,monospace">2026e</text>
+        <path d="M210,148 L370,88 L530,35 L690,18 L690,175 L210,175 Z" fill="rgba(184,146,42,0.07)"/>
+        <polyline points="210,148 370,88 530,35 690,18" stroke="#B8922A" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="210" cy="148" r="5" fill="#B8922A"/>
+        <circle cx="370" cy="88" r="5" fill="#B8922A"/>
+        <circle cx="530" cy="35" r="5" fill="#B8922A"/>
+        <circle cx="690" cy="18" r="5" fill="#B8922A"/>
+        <rect x="188" y="120" width="46" height="20" rx="2" fill="white" stroke="#e8e4dc"/>
+        <text x="211" y="133" font-size="11" fill="#B8922A" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="bold">33%</text>
+        <rect x="348" y="60" width="46" height="20" rx="2" fill="white" stroke="#e8e4dc"/>
+        <text x="371" y="73" font-size="11" fill="#B8922A" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="bold">56%</text>
+        <rect x="508" y="10" width="46" height="20" rx="2" fill="white" stroke="#e8e4dc"/>
+        <text x="531" y="23" font-size="11" fill="#B8922A" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="bold">71%</text>
+        <rect x="666" y="10" width="50" height="20" rx="2" fill="#B8922A"/>
+        <text x="691" y="23" font-size="11" fill="white" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="bold">~85%</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 2 — AI IN HR (PROFESSIONAL SERVICES)
+═══════════════════════════════════════════════════════ -->
+<div id="hr-ps" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 01</div>
+    <h2 class="sh">AI in HR — Professional Services</h2>
+    <p class="sl">How AI is reshaping HR functions specifically within professional services, consulting, and knowledge-work firms. This is the front line of agentic transformation.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">61%</div><div class="stat-l">HR functions now using AI tools — up from 19% in 2023. The steepest adoption curve of any corporate function.</div><div class="stat-s"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner HR Practice Research 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">57%</div><div class="stat-l">Of HR staff time spent on routine admin tasks — the primary agentic AI deployment target in 2026.</div><div class="stat-s"><a href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Deloitte Agentic Enterprise 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">92%</div><div class="stat-l">Of HR leaders have taken action to implement AI in the past 6 months — fastest-ever policy response rate.</div><div class="stat-s"><a href="https://www.hrdive.com/news/ai-is-transforming-hr-but-chros-cant-afford-to-lose-skills/813380/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.hrdive.com/news/ai-is-transforming-hr-but-chros-cant-afford-to-lose-skills/813380/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner HR Practice 2026 · HR Dive Mar 2026</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">73%</div><div class="stat-l">Of employees remain unaware of how AI agents will impact their specific roles — a critical change management gap.</div><div class="stat-s"><a href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Salesforce CHRO Research 2025</a></a></div></div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-h">AI Adoption Across HR Functions (2025)</div>
+      <div class="chart-sub">% of HR teams actively using AI by function · Gartner HR Practice Research 2025</div>
+      <div class="bar-row"><div class="bar-lbl">Overall HR AI Adoption</div><div class="bar-track"><div class="bar-fill bf-g" data-w="61">61% (was 19% in 2023)</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Onboarding & Admin Automation</div><div class="bar-track"><div class="bar-fill bf-t" data-w="72">72%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Talent Acquisition</div><div class="bar-track"><div class="bar-fill bf-t" data-w="68">68%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">L&D / Upskilling</div><div class="bar-track"><div class="bar-fill bf-i" data-w="54">54%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Workforce Planning</div><div class="bar-track"><div class="bar-fill bf-i" data-w="44">44%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Performance Management</div><div class="bar-track"><div class="bar-fill bf-r" data-w="38">38%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Compensation & Benefits</div><div class="bar-track"><div class="bar-fill bf-r" data-w="32">32%</div></div></div>
+    </div>
+
+    <h3 class="sh" style="font-size:1.4rem;margin-top:1rem;">The CHRO Transformation Arc</h3>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-yr">2023 — Experimentation</div><div class="tl-h">AI Copilots Enter HR</div><div class="tl-b">Only 19% of HR using AI. Chatbots handle FAQs. Adoption siloed and ungoverned. Big Four simultaneously restructure: KPMG cuts 29% of UK grad intake, McKinsey lets go 5,000+ staff.</div><div class="tl-src">Gartner 2025 · <a href="https://futureofconsulting.ai/ai-leadership/2026-consultings-ai-revolution-update/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://futureofconsulting.ai/ai-leadership/2026-consultings-ai-revolution-update/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">FutureOfConsulting.ai</a></a></div></div>
+      <div class="tl-item"><div class="tl-yr">2024–2025 — Operationalisation</div><div class="tl-h">Pilots Become Processes</div><div class="tl-b">HR AI adoption jumps to 61%. Recruiting AI mainstream for high-volume roles. 51% of orgs report GenAI reducing entry-level need. 1 in 5 professionals show burnout symptoms (<a href="https://www.mckinsey.org/dotorgblog/the-human-skills-you-will-need-to-thrive-in-2026s-ai-driven-workplace" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.org/dotorgblog/the-human-skills-you-will-need-to-thrive-in-2026s-ai-driven-workplace" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey Health Institute</a></a>, 30,000-person study).</div><div class="tl-src">Gartner · McKinsey Health Institute · <a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey Future of Work Apr 2026</a></a></div></div>
+      <div class="tl-item"><div class="tl-yr">2026 — Agentic Transformation</div><div class="tl-h">Return on Autonomy (RoA) Is the New Metric</div><div class="tl-b">Agentic AI handles onboarding, scheduling, PTO routing, payroll validation, and compliance without human initiation. CHROs redesigning how work creates value, not just optimising processes. 36% of managers expect to manage digital agents within 5 years.</div><div class="tl-src"><a href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Deloitte Agentic Enterprise 2025 · Salesforce CHRO Research · Gartner 2026</a></a></div></div>
+      <div class="tl-item"><div class="tl-yr">2027–2030 — Hybrid Workforce at Scale</div><div class="tl-h">HR Business Partners Become Agent Managers</div><div class="tl-b">Josh Bersin's HR 2030 vision (Apr 2026): HRBPs will "steer agents toward local business needs." CHROs build and manage agentic HR architectures. AI-ready talent commands 25% salary premium. 50% of HR activities automated by 2030 (Gartner).</div><div class="tl-src">Josh Bersin: HR 2030 Vision, Apr 2026 · joshbersin.com · <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">WEF Future of Jobs 2025</a></a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 3 — TALENT ACQUISITION
+═══════════════════════════════════════════════════════ -->
+<div id="talent" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 02</div>
+    <h2 class="sh">AI in Talent Acquisition</h2>
+    <p class="sl">AI has crossed from pilot to standard operating procedure in recruiting. 2026 is the year autonomous agents handle entire workflow segments — not just screening, but sourcing, scheduling, and candidate communication end-to-end.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">67%</div><div class="stat-l">Of talent acquisition professionals now use AI in their hiring workflow — up from 35% just two years ago.</div><div class="stat-s"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">AdAI Research / SHRM / Bullhorn 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">75%</div><div class="stat-l">Faster candidate screening reported by staffing agencies using AI — alongside 30% lower cost-per-hire.</div><div class="stat-s"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ideal/Ceridian AI Recruiting Benchmark 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">340%</div><div class="stat-l">Expansion in candidate pools from AI sourcing — while reducing sourcing time by 67% simultaneously.</div><div class="stat-s"><a href="https://www.secondtalent.com/resources/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.secondtalent.com/resources/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Second Talent / LinkedIn 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">−40%</div><div class="stat-l">Reduction in time-to-hire for enterprise organisations using AI recruitment tools — some report up to 70%.</div><div class="stat-s"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">SHRM AI in HR Study 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">$23K</div><div class="stat-l">Average saving per hire using comprehensive AI recruitment platforms — vs $4,700 avg US cost-per-hire.</div><div class="stat-s"><a href="https://careertrainer.ai/en/reports/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://careertrainer.ai/en/reports/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">CareerTrainer.ai / SHRM 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">94%</div><div class="stat-l">Resume parsing accuracy rate for AI screening tools — outperforming human review on structured criteria.</div><div class="stat-s"><a href="https://www.secondtalent.com/resources/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.secondtalent.com/resources/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Second Talent AI Recruitment Statistics 2025</a></a></div></div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card"><div class="card-no">01</div><div class="card-icon">🤖</div><div class="card-h">Agentic Recruiting Goes Live</div><div class="card-b">AI agents now handle entire recruiting workflow segments without human triggers. Paradox's 'Olivia' (used by FedEx, Unilever) handles 100+ simultaneous candidate conversations and completes screening in under 48 hours vs 5–7 days. Companies report 30–50% faster time-to-hire; high-volume teams see up to 70% gains.</div><div class="card-src">📄 <a href="https://www.peoplescout.com/insights/talent-predictions-for-recruitment-in-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.peoplescout.com/insights/talent-predictions-for-recruitment-in-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">PeopleScout Recruitment Predictions 2026</a></a> · <a href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">InCruiter Blog Mar 2026</a></a></div></div>
+      <div class="card"><div class="card-no">02</div><div class="card-icon">🎯</div><div class="card-h">Skills-Based Hiring Replaces Degree Filters</div><div class="card-b">AI matching tools now evaluate actual skills, career trajectories, and competencies rather than job titles and degrees. Semantic search finds 60% more relevant profiles than Boolean queries and reduces false positives by 62%. 40% of viable mid-level candidates were previously missed by traditional ATS keyword tools.</div><div class="card-src">📄 <a href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">InCruiter AI Recruitment 2026</a></a> · Second Talent 2025</div></div>
+      <div class="card"><div class="card-no">03</div><div class="card-icon">📅</div><div class="card-h">Interview Scheduling: 85% Automated</div><div class="card-b">41% of talent acquisition teams piloted AI scheduling tools in 2025; 23% fully deployed them. Mastercard reduced interview scheduling time by 85%+ and scheduled 88% of interviews within 24 hours. GenAI summarisation cuts meeting note time by ~70%. 73% of orgs use chatbots for initial screening.</div><div class="card-src">📄 InCruiter Blog Mar 2026 · <a href="https://azumo.com/artificial-intelligence/ai-insights/ai-recruitment-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://azumo.com/artificial-intelligence/ai-insights/ai-recruitment-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Azumo AI Recruitment Statistics 2026</a></a></div></div>
+      <div class="card"><div class="card-no">04</div><div class="card-icon">⚖️</div><div class="card-h">Bias Reduction — With Caveats</div><div class="card-b">Properly implemented AI reduces hiring bias by 56–61% across gender, racial, and educational categories. But 40% of HR leaders cite bias and fairness as top AI hiring concern. 79% of candidates want transparency when AI is used in hiring. EU AI Act (Aug 2026) mandates disclosure and bias auditing for automated hiring tools.</div><div class="card-src">📄 <a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">AdAI Research Mar 2026</a></a> · Second Talent 2025 · <a href="https://www.hiretruffle.com/blog/best-ai-recruitment-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.hiretruffle.com/blog/best-ai-recruitment-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">HireVue Candidate Survey 2025</a></a></div></div>
+      <div class="card"><div class="card-no">05</div><div class="card-icon">🎓</div><div class="card-h">Entry-Level Model Dismantled</div><div class="card-b">The traditional early-careers model — mass graduate hiring into generalist roles — is being dismantled. AI is eliminating entry-level tasks (research, drafting, analysis) that historically absorbed thousands of graduates. By 2026, orgs face unprecedented applicant volumes for significantly fewer placements. Entry-level interviews now require AI fluency screening.</div><div class="card-src">📄 PeopleScout Talent Predictions 2026 · <a href="https://www.goldmansachs.com/insights/articles/how-will-ai-affect-the-global-workforce" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.goldmansachs.com/insights/articles/how-will-ai-affect-the-global-workforce" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Goldman Sachs AI Workforce, 2025</a></a></div></div>
+      <div class="card"><div class="card-no">06</div><div class="card-icon">🔍</div><div class="card-h">Candidates Use AI Too — The Arms Race</div><div class="card-b">53% of new hires used GenAI in their job search (Q1 2024). 70% of job seekers use GenAI to research companies and draft cover letters. As AI assists candidates, hiring teams are deploying AI proctoring: eye-movement tracking, dual-voice detection, and multi-face detection to prevent proxy interviews and AI-generated answers.</div><div class="card-src"><a href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">📄 ZipRecruiter 2024 · InCruiter Blog Mar 2026 · Truffle AI Recruitment Stats 2026</a></a></div></div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-h">AI Recruiting Impact — Key Metrics</div>
+      <div class="chart-sub">Reported improvements across organisations using AI in recruitment · Multiple sources 2025–2026</div>
+      <div class="bar-row"><div class="bar-lbl">Faster candidate screening</div><div class="bar-track"><div class="bar-fill bf-g" data-w="75">75% faster</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Reduction in time-to-hire</div><div class="bar-track"><div class="bar-fill bf-t" data-w="40">40% reduction</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Improvement in quality of hire</div><div class="bar-track"><div class="bar-fill bf-t" data-w="35">35% better</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Expansion in candidate pool</div><div class="bar-track"><div class="bar-fill bf-g" data-w="100">340% larger pools</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Cost-per-hire reduction</div><div class="bar-track"><div class="bar-fill bf-i" data-w="30">30% lower</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Hiring bias reduction (when audited)</div><div class="bar-track"><div class="bar-fill bf-gr" data-w="58">56–61% reduction</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">ROI within 18 months</div><div class="bar-track"><div class="bar-fill bf-r" data-w="68">340% ROI average</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 4 — WORKFORCE PLANNING & L&D
+═══════════════════════════════════════════════════════ -->
+<div id="lwd" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 03</div>
+    <h2 class="sh">Workforce Planning & Learning and Development</h2>
+    <p class="sl">AI is transforming L&D from a content-delivery function into a real-time intelligence capability. The Skills Intelligence Loop — connecting workforce data, AI-learning interventions, and performance — is 2026's defining L&D operating model.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">39%</div><div class="stat-l">Of core job skills will change by 2030 — down from 44% in 2023 thanks to proactive upskilling, but still massive.</div><div class="stat-s"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">WEF Future of Jobs Report 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">71%</div><div class="stat-l">Of L&D professionals already exploring or integrating AI into their work — content creation and personalisation lead.</div><div class="stat-s"><a href="https://learnexperts.ai/blog/linkedin-workplace-learning-report/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://learnexperts.ai/blog/linkedin-workplace-learning-report/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">LinkedIn Workplace Learning Report 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">85%</div><div class="stat-l">Of employers globally plan to prioritise workforce upskilling by 2030 — but participation in learning programmes is flat.</div><div class="stat-s">WEF Future of Jobs 2025</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">120M</div><div class="stat-l">Workers at medium-term risk of redundancy because they are unlikely to receive the reskilling they need.</div><div class="stat-s"><a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gloat AI Workforce Trends</a></a>, Mar 2026</a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">27%</div><div class="stat-l">Leadership development is the #1 L&D priority for 2026 — followed by reskilling/upskilling at 24%.</div><div class="stat-s"><a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Absorb LMS / TalentLMS 2026 L&D Report</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">36%</div><div class="stat-l">Of employees say GenAI tools are weakening their ability to solve problems independently — a critical design warning.</div><div class="stat-s"><a href="https://www.talentlms.com/research/learning-development-report-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.talentlms.com/research/learning-development-report-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">TalentLMS 2026 L&D Benchmark Report</a></a></div></div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card"><div class="card-no">01</div><div class="card-icon">🔄</div><div class="card-h">The Skills Intelligence Loop</div><div class="card-b">AI-enabled workforce planning now operates as a continuous cycle: capture workforce data → predict future skill gaps (3 years in advance) → trigger personalised learning interventions → track skills application → feed performance data back into the model. 80% of organisations expected to adopt this by 2025. Replaces periodic, static workforce plans.</div><div class="card-src"><a href="https://www.mitrmedia.com/resources/blogs/ai-in-hr-statistics-2026-adoption-trends-workforce-planning-and-skills-gaps/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mitrmedia.com/resources/blogs/ai-in-hr-statistics-2026-adoption-trends-workforce-planning-and-skills-gaps/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">📄 AI in HR 2026: Skills Gaps & Workforce Planning · mitrmedia.com · Cornerstone 2026 Predictions</a></a></div></div>
+      <div class="card"><div class="card-no">02</div><div class="card-icon">🎯</div><div class="card-h">Learning in the Flow of Work</div><div class="card-b">In 2026, AI agents deliver microlearning, personalised recommendations, and coaching directly within tools employees already use — without stepping away from work. 43% of employers report accelerating demand for new skills (SHRM 2025). Only 24% of workers feel confident in their career-advancement skills (ADP Research 2025). The delivery problem is bigger than the intent problem.</div><div class="card-src">📄 <a href="https://www.cornerstoneondemand.com/resources/article/learning-workflow-transformation/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.cornerstoneondemand.com/resources/article/learning-workflow-transformation/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Cornerstone 2026 Predictions Report</a></a> · <a href="https://www.intellum.com/resources/blog/4-ai-in-ld-trends-to-prepare-for-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.intellum.com/resources/blog/4-ai-in-ld-trends-to-prepare-for-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Intellum AI in L&D 2026</a></a></div></div>
+      <div class="card"><div class="card-no">03</div><div class="card-icon">📊</div><div class="card-h">AI Fluency Is Now Mandatory</div><div class="card-b">Strategic and critical thinking (56%), digital fluency (44%), and leadership skills (42%) are the most critical 2026 capabilities. Gartner predicts 50% of organisations will require "AI-free" skills assessments by 2026 to prevent cognitive atrophy. AI fluency is no longer a nice-to-have — it's a table-stakes competency across all roles, not just tech.</div><div class="card-src">📄 <a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Absorb LMS 2026</a></a> L&D Report · Gartner Strategic Predictions · <a href="https://www.intellum.com/resources/blog/4-ai-in-ld-trends-to-prepare-for-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.intellum.com/resources/blog/4-ai-in-ld-trends-to-prepare-for-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Intellum 2026</a></a></div></div>
+      <div class="card"><div class="card-no">04</div><div class="card-icon">🤝</div><div class="card-h">Mentorship as Human-in-the-Loop</div><div class="card-b">As AI automates content delivery and personalisation, mentorship fills the human gap. 77% of HR and L&D leaders say formal mentorship will be critical in 2026 — the mechanism that simultaneously builds skills, leadership, and institutional knowledge. Only 15% of employees say their manager helped them build a career development plan in the past 6 months.</div><div class="card-src">📄 <a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Absorb LMS / Together Trends Report 2026</a></a> · LinkedIn Workplace Learning 2025</div></div>
+      <div class="card"><div class="card-no">05</div><div class="card-icon">🏢</div><div class="card-h">Professional Services: Firm Reskilling Race</div><div class="card-b">BCG's 1,200-person "ground troops" gather AI feedback daily and push adoption. Deloitte runs an AI Academy. McKinsey solved "prompt anxiety" with 1-hour prompt training. PwC trains 75,000 employees. Every major firm has a mandatory AI fluency programme — the question is whether external training translates to changed behaviour at scale.</div><div class="card-src">📄 <a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Plus.ai</a></a> Overview · <a href="https://futureofconsulting.ai/ai-leadership/2026-consultings-ai-revolution-update/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://futureofconsulting.ai/ai-leadership/2026-consultings-ai-revolution-update/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">FutureOfConsulting.ai Jan 2026</a></a></div></div>
+      <div class="card"><div class="card-no">06</div><div class="card-icon">📈</div><div class="card-h">Internal Mobility as the New Hiring</div><div class="card-b">35% of organisations used an internal talent marketplace in 2025 (up from 25% in 2024). Career development champions deploy 33% more development practices and are significantly more likely to be "accelerating" in GenAI adoption. L&D will drive internal mobility as organisations reroute talent displaced from automated roles into higher-value work.</div><div class="card-src"><a href="https://learnexperts.ai/blog/linkedin-workplace-learning-report/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://learnexperts.ai/blog/linkedin-workplace-learning-report/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">📄 SHRM 2025 Recruiting Trends · LinkedIn Workplace Learning Report 2025</a></a></div></div>
+    </div>
+
+    <h3 class="sh" style="font-size:1.4rem;margin-top:1rem;">Top Skills Rising in Importance by 2030</h3>
+    <p style="font-size:0.78rem;color:var(--mid);margin-bottom:1.2rem;font-family:'IBM Plex Mono',monospace;">Employer priority ranking · WEF Future of Jobs Report 2025</p>
+    <div class="skill-row">
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="95"></div></div><div class="skill-pct">95%</div><div class="skill-lbl">AI & Big Data</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="85"></div></div><div class="skill-pct">85%</div><div class="skill-lbl">Analytical Thinking</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="82"></div></div><div class="skill-pct">82%</div><div class="skill-lbl">Creative Thinking</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="78"></div></div><div class="skill-pct">78%</div><div class="skill-lbl">Leadership</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="74"></div></div><div class="skill-pct">74%</div><div class="skill-lbl">Resilience & Agility</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="70"></div></div><div class="skill-pct">70%</div><div class="skill-lbl">Talent Management</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="64"></div></div><div class="skill-pct">64%</div><div class="skill-lbl">Cybersecurity</div></div>
+      <div class="skill-col"><div class="skill-track"><div class="skill-fill" data-h="58"></div></div><div class="skill-pct">58%</div><div class="skill-lbl">Env. Stewardship</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 5 — EMPLOYEE EXPERIENCE & PERFORMANCE
+═══════════════════════════════════════════════════════ -->
+<div id="exp-perf" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 04</div>
+    <h2 class="sh">Employee Experience & Performance</h2>
+    <p class="sl">AI is reshaping what employees value, how they perform, and whether they stay. The paradox of 2026: AI's heaviest users are also its most engaged — and most likely to quit.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">+25%</div><div class="stat-l">Salary premium for workers with demonstrable AI skills — over peers without them. AI fluency is now a visible wage driver.</div><div class="stat-s"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">PwC AI Jobs Barometer 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">1 in 5</div><div class="stat-l">Professionals show active burnout symptoms — including cognitive and emotional impairment — per McKinsey Health Institute survey of 30,000 across 30 countries.</div><div class="stat-s"><a href="https://www.mckinsey.org/dotorgblog/the-human-skills-you-will-need-to-thrive-in-2026s-ai-driven-workplace" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.org/dotorgblog/the-human-skills-you-will-need-to-thrive-in-2026s-ai-driven-workplace" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey Health Institute 2026</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">+7pp</div><div class="stat-l">AI creators and heavy users are 7 percentage points more likely to plan quitting in next 3–6 months than light users — they know their market value.</div><div class="stat-s">McKinsey Future of Work, Apr 2026</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">63%</div><div class="stat-l">Greater productivity reported by HR leaders using AI, with 55% automating manual tasks and 52% improving business efficiency.</div><div class="stat-s">Azumo AI Recruitment Statistics 2026</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">47%</div><div class="stat-l">Only 47% of employees strongly agree they know what is expected of them — a widening expectations gap in AI-era workplaces.</div><div class="stat-s"><a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.absorblms.com/company/newsroom/together-trends-report-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gallup / Absorb LMS 2026 L&D Report</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">70%</div><div class="stat-l">Of workers are open to offloading work to AI to free up time and boost creativity (Deloitte 2025 Global Human Capital Trends).</div><div class="stat-s"><a href="https://www.deloitte.com/us/en/services/consulting/about/future-of-work-ai.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.deloitte.com/us/en/services/consulting/about/future-of-work-ai.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Deloitte Global Human Capital Trends 2025</a></a></div></div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card"><div class="card-no">01</div><div class="card-icon">🔥</div><div class="card-h">The Burnout Paradox</div><div class="card-b">AI's fastest adopters — creators and heavy users — report the highest engagement but also the highest intent to quit. They are energised by new tools but acutely aware of their market premium. Entry-level burnout is rising as AI raises output expectations without proportionally reducing workloads in many firms.</div><div class="card-src"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">📄 McKinsey Future of Work, Apr 2026</a></a> · McKinsey Health Institute 2026</a></div></div>
+      <div class="card"><div class="card-no">02</div><div class="card-icon">🧭</div><div class="card-h">What Employees Actually Value</div><div class="card-b">Four years of McKinsey research shows that while AI transforms how work is done, what employees fundamentally value remains consistent: meaningful work, career development, manager support, and a sense of belonging. Intent to quit among early-tenure employees fell from 37% (2023) to 32% (2025) — but early-career workers are simultaneously facing the tightest job market in a decade.</div><div class="card-src">📄 McKinsey Future of Work, Apr 2026</div></div>
+      <div class="card"><div class="card-no">03</div><div class="card-icon">🏆</div><div class="card-h">AI-Augmented Performance Standards</div><div class="card-b">Management consultants using AI complete tasks 25.1% faster with 40% higher quality (BCG research). AI-driven interview analytics boost hiring accuracy by 40%. Predictive analytics improve talent matching by 67%. Performance benchmarks are being set by AI-augmented workers — non-users increasingly fall behind the new baseline.</div><div class="card-src"><a href="https://azumo.com/artificial-intelligence/ai-insights/ai-recruitment-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://azumo.com/artificial-intelligence/ai-insights/ai-recruitment-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">📄 BCG 10-20-70 Research · Azumo AI Recruitment Statistics 2026</a></a></div></div>
+      <div class="card"><div class="card-no">04</div><div class="card-icon">🤝</div><div class="card-h">Human Preference for AI Collaboration</div><div class="card-b">Deloitte finds that most workers prefer combining AI tools with human interaction — the vast majority across all age groups want an even mix of AI and human collaboration, not full automation. 64% of IT leaders predict a complete HR–IT merger within 5 years as the boundary between people systems and AI infrastructure dissolves.</div><div class="card-src"><a href="https://www.deloitte.com/us/en/services/consulting/about/future-of-work-ai.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.deloitte.com/us/en/services/consulting/about/future-of-work-ai.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">📄 Deloitte Global Human Capital Trends 2025 · ADP HR Technology Trends 2026</a></a></div></div>
+      <div class="card"><div class="card-no">05</div><div class="card-icon">⚡</div><div class="card-h">Manager Role: Coach Not Controller</div><div class="card-b">As AI automates admin, managers evolve into coaches. Mercer predicts this shift demands new capabilities: empathy, data fluency, and continuous feedback loops supported by AI mentors. Gartner says CHROs must help managers regulate emotions through change and build employees' "change reflexes." Only 15% of employees say their manager helped build a career development plan in the past 6 months.</div><div class="card-src">📄 <a href="https://www.mercer.com/en-us/insights/talent-and-transformation/future-of-work/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mercer.com/en-us/insights/talent-and-transformation/future-of-work/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Mercer Global Talent Trends 2025</a></a> · Gartner HR Symposium 2025 · LinkedIn Workplace Learning 2025</div></div>
+      <div class="card"><div class="card-no">06</div><div class="card-icon">🌐</div><div class="card-h">Remote & Flexible Work as AI Accelerant</div><div class="card-b">AI-skilled roles are 70% more likely to advertise remote work and positive culture signals (Oxford Internet Institute analysis of 10M job postings). Roles requiring AI skills offer significant salary premiums and better benefits. 70% of the workforce expected to be remote at least 5 days/month by end of 2026 — AI tools are what make distributed knowledge work viable.</div><div class="card-src">📄 <a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Oxford Internet Institute 2025</a></a> · <a href="https://www.talentmsh.com/insights/hiring-recruiting-trends-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.talentmsh.com/insights/hiring-recruiting-trends-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">MSH Recruitment Trends 2026</a></a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 6 — FIRMS DEEP-DIVE
+═══════════════════════════════════════════════════════ -->
+<div id="firms" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 05</div>
+    <h2 class="sh">Big 4, MBB & Indian IT Giants —<br>AI Moves by Firm</h2>
+    <p class="sl">Firm-specific data on AI investment, headcount impact, proprietary platforms, revenue effects, and strategic positioning. The 10 firms reshaping professional services through AI.</p>
+
+    <div class="sub-banner" style="background:var(--ink);">Big Four — Professional Services</div>
+    <div class="co-grid">
+      <div class="co-card"><div class="co-accent" style="background:#FFD700;"></div><div class="co-name">EY</div><div class="co-sub">$51.2B Revenue · 400K+ Employees</div><div class="co-desc">EY invested $1.4B to build EY.ai (2023) and expanded via NVIDIA partnership with on-prem Dell AI Factory in 2025 — the only Big 4 firm to go all-in with NVIDIA. Positions EY as the sovereign AI leader in regulated industries. AI-related revenue up 30% in FY25.</div><div class="co-stats"><div><div class="co-sn" style="color:#B8922A;">$1.4B</div><div class="co-sl">EY.ai investment + NVIDIA partnership</div></div><div><div class="co-sn" style="color:#B8922A;">+30%</div><div class="co-sl">AI revenue growth FY25</div></div><div><div class="co-sn" style="color:#B83232;">−11%</div><div class="co-sl">UK graduate intake cut (2025)</div></div><div><div class="co-sn" style="color:#0F5F6B;">+35%</div><div class="co-sl">Faster AI-augmented audits</div></div></div><div class="co-pills"><span class="co-pill">EY.ai</span><span class="co-pill">NVIDIA</span><span class="co-pill">Sovereign AI</span></div><div class="co-src"><a href="https://thinking.inc/en/industry-service/ai-in-professional-services/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://thinking.inc/en/industry-service/ai-in-professional-services/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">EY Audit Quality Report 2025</a></a> · <a href="https://consulting-huber.com/ai-consulting-frameworks-compared.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://consulting-huber.com/ai-consulting-frameworks-compared.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Consulting Huber 2026</a></a> · Plus.ai</div></div>
+      <div class="co-card"><div class="co-accent" style="background:#86BC25;"></div><div class="co-name">Deloitte</div><div class="co-sub">$67.2B Revenue · Largest Big 4</div><div class="co-desc">Deloitte's PairD (Google DeepMind co-built) and its AI Academy represent full-stack approach. Only Big 4 with a formally numbered AI ethics methodology: the 7 Trustworthy AI dimensions. Real client case: Dutch bank achieved 90% reduction in KYC onboarding time and 30% staff workload cut using Deloitte agentic AI.</div><div class="co-stats"><div><div class="co-sn" style="color:#86BC25;">7</div><div class="co-sl">Trustworthy AI dimensions (only named framework in Big 4)</div></div><div><div class="co-sn" style="color:#B83232;">−18%</div><div class="co-sl">UK graduate intake cut (2025)</div></div><div><div class="co-sn" style="color:#B8922A;">90%</div><div class="co-sl">KYC onboarding time reduced (client case)</div></div><div><div class="co-sn" style="color:#0F5F6B;">−30%</div><div class="co-sl">Staff workload in same KYC case</div></div></div><div class="co-pills"><span class="co-pill">PairD</span><span class="co-pill">AI Academy</span><span class="co-pill">Google Cloud</span></div><div class="co-src">Deloitte Agentic Enterprise 2025 · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Neurons Lab Apr 2026</a></a></div></div>
+      <div class="co-card"><div class="co-accent" style="background:#D04A02;"></div><div class="co-name">PwC</div><div class="co-sub">$55.4B Revenue · OpenAI's Largest Enterprise Customer</div><div class="co-desc">PwC became OpenAI's largest enterprise customer and first reseller by 2024. ChatPwC now has 200,000 active internal users. Committed $1B in AI investment over 3 years. Industries with higher AI adoption show 4× higher productivity growth per PwC's AI Jobs Barometer. AI-skilled workers earn 25% more on average.</div><div class="co-stats"><div><div class="co-sn" style="color:#D04A02;">200K</div><div class="co-sl">ChatPwC internal users</div></div><div><div class="co-sn" style="color:#D04A02;">$1B</div><div class="co-sl">3-year AI investment commitment</div></div><div><div class="co-sn" style="color:#B8922A;">4×</div><div class="co-sl">Productivity growth in AI-intensive sectors</div></div><div><div class="co-sn" style="color:#0F5F6B;">25%</div><div class="co-sl">Salary premium for AI-skilled workers</div></div></div><div class="co-pills"><span class="co-pill">ChatPwC</span><span class="co-pill">OpenAI Reseller</span><span class="co-pill">AI Jobs Barometer</span></div><div class="co-src"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">PwC 2026 AI Predictions</a></a> · FutureOfConsulting.ai</div></div>
+      <div class="co-card"><div class="co-accent" style="background:#00338D;"></div><div class="co-name">KPMG</div><div class="co-sub">$38.4B Revenue · ISO/IEC 42001 First Claimant</div><div class="co-desc">KPMG's $2B Microsoft alliance (2023) is the largest single AI partnership investment by any Big 4 firm. KymChat (internal AI) and Clara AI (audit-specific, with Azure) form a dual-platform strategy. KPMG made the steepest graduate hiring cut in Big 4: −29% UK grads in 2025. Projects $3T in global corporate productivity from agentic AI.</div><div class="co-stats"><div><div class="co-sn" style="color:#00338D;">$2B</div><div class="co-sl">Microsoft AI alliance value</div></div><div><div class="co-sn" style="color:#B83232;">−29%</div><div class="co-sl">UK graduate intake (steepest in Big 4)</div></div><div><div class="co-sn" style="color:#0F5F6B;">10</div><div class="co-sl">Trusted AI pillars — only ISO/IEC 42001 claim</div></div><div><div class="co-sn" style="color:#B8922A;">$3T</div><div class="co-sl">Projected productivity from agentic AI</div></div></div><div class="co-pills"><span class="co-pill">KymChat</span><span class="co-pill">Clara AI</span><span class="co-pill">Google Agentspace</span></div><div class="co-src">FutureOfConsulting.ai Jan 2026 · Neurons Lab Apr 2026</div></div>
+    </div>
+
+    <div class="sub-banner" style="background:var(--mid);">Accenture — Scale Leader</div>
+    <div class="co-grid" style="grid-template-columns:1fr;">
+      <div class="co-card"><div class="co-accent" style="background:#A100FF;"></div><div class="co-name">Accenture</div><div class="co-sub">$65B Revenue · Largest AI Workforce in Consulting</div><div class="co-desc">Accenture made the largest single AI commitment of any consulting firm: $3B dedicated, 77,000 AI professionals on staff, and $900M in new AI consulting bookings in 2024 alone. Despite restructuring 11,000 roles, it is the only firm aggressively scaling headcount back up through AI-talent hires. AI Refinery is its branded deployment platform with multi-cloud flexibility (Microsoft, AWS, Google).</div><div class="co-stats"><div><div class="co-sn" style="color:#A100FF;">$3B</div><div class="co-sl">Dedicated AI investment</div></div><div><div class="co-sn" style="color:#A100FF;">77K</div><div class="co-sl">AI & data professionals on payroll</div></div><div><div class="co-sn" style="color:#B8922A;">$900M</div><div class="co-sl">New AI consulting bookings (2024)</div></div><div><div class="co-sn" style="color:#B83232;">−11K</div><div class="co-sl">Staff restructured in AI reskilling pivot</div></div></div><div class="co-pills"><span class="co-pill">AI Refinery</span><span class="co-pill">Pulse of Change</span><span class="co-pill">Multi-cloud</span><span class="co-pill">AWS · Azure · GCP</span></div><div class="co-src">Plus.ai · Consulting Huber 2026 · HR Digest Dec 2025</div></div>
+    </div>
+
+    <div class="sub-banner" style="background:var(--ink);">MBB — Strategy Consulting</div>
+    <div class="co-grid">
+      <div class="co-card"><div class="co-accent" style="background:#00A651;"></div><div class="co-name">BCG</div><div class="co-sub">$14.4B Revenue (2025) · 37K Employees</div><div class="co-desc">BCG is the first MBB firm to publicly disclose a concrete AI revenue figure: 25% of its $14.4B 2025 revenue ($3.6B) came directly from AI engagements — via Bloomberg, April 2026. BCG X, its 3,000-person tech division, executes at scale. The 10-20-70 methodology (10% algorithm, 20% technology, 70% people and process) is the most-cited AI implementation framework globally.</div><div class="co-stats"><div><div class="co-sn" style="color:#00A651;">$3.6B</div><div class="co-sl">AI consulting revenue (25% of total, 2025)</div></div><div><div class="co-sn" style="color:#00A651;">37K</div><div class="co-sl">Global headcount — now larger than McKinsey</div></div><div><div class="co-sn" style="color:#B8922A;">3,000</div><div class="co-sl">BCG X specialists (AI-native delivery)</div></div><div><div class="co-sn" style="color:#0F5F6B;">+14%</div><div class="co-sl">Delhi headcount surge — now BCG's largest office</div></div></div><div class="co-pills"><span class="co-pill">BCG X</span><span class="co-pill">10-20-70</span><span class="co-pill">AI Radar Report</span><span class="co-pill">Palantir Alliance</span></div><div class="co-src"><a href="https://www.metaintro.com/blog/bcg-25-percent-ai-revenue-consulting-jobs-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.metaintro.com/blog/bcg-25-percent-ai-revenue-consulting-jobs-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Bloomberg / Metaintro Apr 2026</a></a> · Consulting Huber 2026 · <a href="https://thefinancestory.com/bcg-surpassed-mckinsey-by-headcount-with-talent-from-india" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://thefinancestory.com/bcg-surpassed-mckinsey-by-headcount-with-talent-from-india" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">The Finance Story Aug 2025</a></a></div></div>
+      <div class="co-card"><div class="co-accent" style="background:#003087;"></div><div class="co-name">McKinsey</div><div class="co-sub">~$16B Revenue · 40K Employees</div><div class="co-desc">McKinsey owns the most-cited annual AI survey globally (QuantumBlack, 2,000 execs, 105 countries) and deploys 12,000 AI agents internally. After restructuring to 40,000 staff (cutting 5,000+), it is planning 12% more hiring in 2026 — all AI-fluent profiles. What used to require 14 consultants now requires 2–3 plus AI agents. Lilli is powered by 100+ years of McKinsey's proprietary insights.</div><div class="co-stats"><div><div class="co-sn" style="color:#003087;">12K</div><div class="co-sl">AI agents deployed internally</div></div><div><div class="co-sn" style="color:#B83232;">−5K+</div><div class="co-sl">Net headcount cut since 2023</div></div><div><div class="co-sn" style="color:#0F5F6B;">40%</div><div class="co-sl">Of all client work includes AI component</div></div><div><div class="co-sn" style="color:#B8922A;">+12%</div><div class="co-sl">Planned hiring growth in 2026 (AI-focused)</div></div></div><div class="co-pills"><span class="co-pill">Lilli AI</span><span class="co-pill">QuantumBlack</span><span class="co-pill">Rewired Framework</span></div><div class="co-src"><a href="https://www.mbaandbeyond.com/blog/the-mbb-landscape-in-2026-rankings-realities-the-road-ahead" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mbaandbeyond.com/blog/the-mbb-landscape-in-2026-rankings-realities-the-road-ahead" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">MBA & Beyond Apr 2026</a></a> · The Finance Story Aug 2025 · Plus.ai</div></div>
+      <div class="co-card"><div class="co-accent" style="background:#CC0000;"></div><div class="co-name">Bain & Company</div><div class="co-sub">~$6B Revenue · 19K Employees</div><div class="co-desc">Bain holds the most exclusive AI partnership of the MBB: a global strategic alliance with OpenAI — the only firm with a dedicated OpenAI Center of Excellence. 13,000 consultants equipped with ChatGPT Enterprise. Bain's internal Sage platform (GPT-4 powered) indexes its entire proprietary knowledge base. The majority of all client projects now involve GenAI tools. 19,000+ custom GPTs built by Bain staff.</div><div class="co-stats"><div><div class="co-sn" style="color:#CC0000;">13K</div><div class="co-sl">Consultants with ChatGPT Enterprise access</div></div><div><div class="co-sn" style="color:#CC0000;">19K+</div><div class="co-sl">Custom GPTs built by Bain consultants</div></div><div><div class="co-sn" style="color:#B8922A;">700+</div><div class="co-sl">AI ecosystem partner organisations</div></div><div><div class="co-sn" style="color:#0F5F6B;">50%</div><div class="co-sl">Of AI jobs could go unfilled by 2027 (Bain research)</div></div></div><div class="co-pills"><span class="co-pill">Sage AI</span><span class="co-pill">OpenAI CoE</span><span class="co-pill">Palantir Alliance</span><span class="co-pill">AI Aspire</span></div><div class="co-src"><a href="https://www.bain.com/about/partnerships-alliance-ecosystem/openai-alliance/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.bain.com/about/partnerships-alliance-ecosystem/openai-alliance/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Bain.com</a></a> · <a href="https://www.virtasant.com/ai-today/big-five-consulting-betting-billions-on-ai-partnerships" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.virtasant.com/ai-today/big-five-consulting-betting-billions-on-ai-partnerships" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Virtasant Feb 2026</a></a> · Plus.ai</div></div>
+    </div>
+
+    <div class="sub-banner" style="background:var(--teal);">Indian IT Giants — Scale & Delivery</div>
+    <div class="co-grid">
+      <div class="co-card"><div class="co-accent" style="background:#1B4D8E;"></div><div class="co-name">TCS</div><div class="co-sub">$29B+ Revenue · 607K Employees</div><div class="co-desc">TCS is executing the most ambitious AI infrastructure bet in Indian IT: $6.5B committed over 5–7 years to build AI data centres with up to 1 gigawatt capacity. AI revenue reached $1.8B annualised in Q3 FY26 (5.8% of run rate), growing 16.3% QoQ in AI deals. Its "TCS to the Power of AI" programme has given 600,000 employees access to AI tools. Aspires to be the world's largest AI tech services company.</div><div class="co-stats"><div><div class="co-sn" style="color:#1B4D8E;">$1.8B</div><div class="co-sl">Annualised AI revenue (Q3 FY26)</div></div><div><div class="co-sn" style="color:#1B4D8E;">$6.5B</div><div class="co-sl">AI data centre investment (5–7 years)</div></div><div><div class="co-sn" style="color:#B8922A;">600K</div><div class="co-sl">Employees with AI tools access</div></div><div><div class="co-sn" style="color:#0F5F6B;">5,000+</div><div class="co-sl">AI projects; 54/60 top clients engaged</div></div></div><div class="co-pills"><span class="co-pill">Ignio AIOps</span><span class="co-pill">AI Hackathon 2.8L participants</span><span class="co-pill">$9.3B TCV Q3 FY26</span></div><div class="co-src"><a href="https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q3-fy-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q3-fy-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">TCS Q3 FY26 Press Release</a></a> · <a href="https://analyticsindiamag.com/ai-news-updates/tcs-posts-1-5-bn-ai-revenue-as-it-aims-to-become-largest-ai-tech-services-firm/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://analyticsindiamag.com/ai-news-updates/tcs-posts-1-5-bn-ai-revenue-as-it-aims-to-become-largest-ai-tech-services-firm/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Analytics India Mag Dec 2025</a></a> · <a href="https://www.angelone.in/news/stocks/tcs-vs-infosys-how-tcs-and-infosys-differ-on-ai-deals-and-shareholder-returns" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.angelone.in/news/stocks/tcs-vs-infosys-how-tcs-and-infosys-differ-on-ai-deals-and-shareholder-returns" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Angel One Jan 2026</a></a></div></div>
+      <div class="co-card"><div class="co-accent" style="background:#007CC3;"></div><div class="co-name">Infosys</div><div class="co-sub">$20.16B Revenue FY26 · 328K Employees</div><div class="co-desc">Infosys reported $20.16B in FY26 revenue with $14.9B in deal wins — its strongest year, driven by AI-led transformation mandates. AI programmes account for 5.5% of total revenue. Through Topaz AI (with its new Topaz Fabric agent suite), Infosys works with 90% of its largest 200 clients on AI, running 4,600 active AI projects, generating 28 million lines of AI-assisted code, and building 500+ enterprise agents.</div><div class="co-stats"><div><div class="co-sn" style="color:#007CC3;">$14.9B</div><div class="co-sl">Deal wins in FY26 (AI-led)</div></div><div><div class="co-sn" style="color:#007CC3;">5.5%</div><div class="co-sl">AI programme contribution to revenue</div></div><div><div class="co-sn" style="color:#B8922A;">4,600</div><div class="co-sl">Active AI projects</div></div><div><div class="co-sn" style="color:#0F5F6B;">90%</div><div class="co-sl">Of top 200 clients engaged on AI</div></div></div><div class="co-pills"><span class="co-pill">Topaz AI</span><span class="co-pill">Topaz Fabric Agents</span><span class="co-pill">28M AI code lines</span><span class="co-pill">500+ Agents</span></div><div class="co-src"><a href="https://www.sec.gov/Archives/edgar/data/0001067491/000106749126000004/exv99w03.htm" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.sec.gov/Archives/edgar/data/0001067491/000106749126000004/exv99w03.htm" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Infosys SEC 6-K FY2025</a></a> · <a href="https://infotechlead.com/software/infosys-fy26-revenue-hits-20-16-bn-as-ai-strategy-drives-14-9-bn-deal-wins-95361" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://infotechlead.com/software/infosys-fy26-revenue-hits-20-16-bn-as-ai-strategy-drives-14-9-bn-deal-wins-95361" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">InfotechLead Apr 2026</a></a> · <a href="https://tradebrains.in/tcs-vs-infosys-which-it-stock-will-win-q4-fy26/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://tradebrains.in/tcs-vs-infosys-which-it-stock-will-win-q4-fy26/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Trade Brains Apr 2026</a></a></div></div>
+    </div>
+
+    <!-- AI Positioning Matrix -->
+    <div class="chart-box" style="overflow-x:auto;margin-top:2rem;">
+      <div class="chart-h">Firm AI Positioning Matrix — 2026</div>
+      <div class="chart-sub">Differentiation across 10 firms · Sources: <a href="https://consulting-huber.com/ai-consulting-frameworks-compared.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://consulting-huber.com/ai-consulting-frameworks-compared.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Consulting Huber 2026 · Virtasant Feb 2026 · firm annual reports</a></a></div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.74rem;">
+        <thead><tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);">Firm</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);">AI Positioning</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);">Signature Platform</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);">Key Alliance</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);">AI Revenue Signal</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);background:white;"><td style="padding:0.6rem 0.8rem;font-weight:600;">EY</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Sovereign & regulated AI</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">EY.ai</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">NVIDIA + Dell AI Factory</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">+30% AI revenue FY25</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:var(--paper);"><td style="padding:0.6rem 0.8rem;font-weight:600;">McKinsey</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Methodology & research</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Lilli + 12K agents</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Rewired Framework</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">40% of all work includes AI</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:white;"><td style="padding:0.6rem 0.8rem;font-weight:600;">Deloitte</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Trust, governance & agentic</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">PairD + AI Academy</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Google Cloud + ServiceNow</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Only formal Trustworthy AI framework</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:var(--paper);"><td style="padding:0.6rem 0.8rem;font-weight:600;">PwC</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">GenAI seat deployment at scale</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">ChatPwC (200K users)</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">OpenAI (first reseller)</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">$1B 3-yr investment; 4× productivity gain</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:white;"><td style="padding:0.6rem 0.8rem;font-weight:600;">KPMG</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">AI governance & compliance</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">KymChat + Clara AI</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Microsoft ($2B) + Google</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Only ISO/IEC 42001 claim; $3T productivity projection</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:var(--paper);"><td style="padding:0.6rem 0.8rem;font-weight:600;">Accenture</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Largest AI workforce</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">AI Refinery</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Multi-cloud: MS, AWS, GCP</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">$3B commitment; $900M new bookings</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:white;"><td style="padding:0.6rem 0.8rem;font-weight:600;">BCG</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">AI value-capture economics</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">BCG X + AI Radar</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Palantir + AI Aspire</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">$3.6B AI revenue (25% of total)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:var(--paper);"><td style="padding:0.6rem 0.8rem;font-weight:600;">Bain</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Exclusive OpenAI partnership</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Sage (GPT-4 powered)</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">OpenAI (exclusive CoE)</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">19K+ custom GPTs; majority of projects use GenAI</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:white;"><td style="padding:0.6rem 0.8rem;font-weight:600;">TCS</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Full-stack AI infra + services</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Ignio AIOps</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">$6.5B AI data centres</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">$1.8B annualised AI revenue (Q3 FY26)</td></tr>
+          <tr style="background:var(--paper);"><td style="padding:0.6rem 0.8rem;font-weight:600;">Infosys</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">AI-led enterprise delivery</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">Topaz + Topaz Fabric</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">NVIDIA, Microsoft, AWS</td><td style="padding:0.6rem 0.8rem;color:var(--mid);">5.5% of revenue; 4,600 active projects</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 7 — JOBS AT RISK VS NEW ROLES
+═══════════════════════════════════════════════════════ -->
+<div id="jobs" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 06</div>
+    <h2 class="sh">Jobs at Risk vs New Roles Created</h2>
+    <p class="sl">The net picture is positive — 78 million more jobs by 2030 — but the transition will be uneven, painful for specific cohorts, and heavily concentrated in 2027–2030. Here's the honest breakdown.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">92M</div><div class="stat-l">Jobs displaced globally by 2030 — but 170M new roles created, a net gain of 78M. 22% of formal jobs in structural churn.</div><div class="stat-s">WEF Future of Jobs Report 2025</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">40%</div><div class="stat-l">Of jobs globally face meaningful AI exposure (IMF 2024). In high-income countries this rises to 60% of roles exposed.</div><div class="stat-s"><a href="https://www.imf.org/-/media/files/publications/sdn/2026/english/sdnea2026001.pdf" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.imf.org/-/media/files/publications/sdn/2026/english/sdnea2026001.pdf" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">IMF AI and New Jobs SDN/2026/001</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--teal)">55K</div><div class="stat-l">Jobs directly attributed to AI cuts in the US in 2025 alone — out of 1.17M total layoffs — per Challenger, Gray & Christmas.</div><div class="stat-s"><a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Challenger, Gray & Christmas 2025</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">140%</div><div class="stat-l">Growth in demand for AI Engineer roles — among the fastest-growing careers in 2025–2026 alongside AI Product Manager (+35–110%) and Prompt Engineer roles.</div><div class="stat-s"><a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">WeTenant / DemandSage AI Job Statistics 2026</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--red)">−16%</div><div class="stat-l">Relative employment decline for early-career workers (ages 22–25) in the most AI-exposed fields since ChatGPT's release.</div><div class="stat-s"><a href="https://www.imf.org/-/media/files/publications/sdn/2026/english/sdnea2026001.pdf" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.imf.org/-/media/files/publications/sdn/2026/english/sdnea2026001.pdf" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Brynjolfsson, Chandar & Chen 2025 · IMF SDN/2026/001</a></a></div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--gold)">2.84×</div><div class="stat-l">Return on AI investment for frontier firms (leading adopters) vs just 0.84× for laggards — AI is already a structural performance divider.</div><div class="stat-s"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">IDC 2025 · McKinsey State of AI</a></a></div></div>
+    </div>
+
+    <!-- Jobs at Risk Table -->
+    <div class="chart-box" style="overflow-x:auto;">
+      <div class="chart-h">Roles: At Risk vs Growing vs Emerging</div>
+      <div class="chart-sub">Sources: Goldman Sachs AI Workforce 2025 · WEF Future of Jobs 2025 · IMF SDN/2026/001 · National University AI Job Statistics 2026</div>
+      <table class="jobs-table">
+        <thead><tr>
+          <th>Role / Category</th>
+          <th>AI Exposure Level</th>
+          <th>Trend</th>
+          <th>Key Data Point</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Computer Programmers</td><td><span class="risk-hi">■ HIGH</span></td><td>Shrinking — tasks automating faster than roles</td><td>AI coding assistants write 41% of all code; 50% of devs use AI daily. But developer employment projected +17.9% (BLS) — role evolves, not disappears</td></tr>
+          <tr><td>Accountants & Auditors</td><td><span class="risk-hi">■ HIGH</span></td><td>Contracting in volume, not eliminated</td><td>EY AI-augmented audit: 35% faster, 22% more issues found. Fewer junior accountants needed; senior judgment premium rises</td></tr>
+          <tr><td>Legal & Administrative Assistants</td><td><span class="risk-hi">■ HIGH</span></td><td>Significant displacement risk</td><td>Law firms report 50–80% reduction in document review time. Goldman Sachs identifies legal and admin as highest-displacement occupations</td></tr>
+          <tr><td>Customer Service Representatives</td><td><span class="risk-hi">■ HIGH</span></td><td>Rapid volume decline</td><td>AI handles 65% of initial inquiries across major telecoms. Agentic AI can automate 90%+ of end-to-end handling (Josh Bersin)</td></tr>
+          <tr><td>Data Entry & Back-Office Roles</td><td><span class="risk-hi">■ HIGH</span></td><td>Effectively eliminated at scale</td><td>Wall Street banks expect to cut ~200,000 roles over 3–5 years as AI takes over entry-level and back-office tasks</td></tr>
+          <tr><td>Translators & Interpreters</td><td><span class="risk-hi">■ HIGH</span></td><td>98% automation potential (NLP tools)</td><td>ChatGPT, DeepL, Google Translate handle majority of standard translation tasks. Role shifts to cultural nuance and legal contexts</td></tr>
+          <tr><td>Manufacturing & Production Workers</td><td><span class="risk-md">● MEDIUM</span></td><td>Selective automation — physical tasks remain</td><td>Global manufacturing could lose 20M jobs to automation by 2030. But skilled trades and installation roles remain at low risk</td></tr>
+          <tr><td>Retail Cashiers</td><td><span class="risk-hi">■ HIGH</span></td><td>65% automation risk by 2025</td><td>Walmart self-checkout projected to replace 8,000 positions; Sam's Club AI could eliminate 12,000 cashier roles</td></tr>
+          <tr><td>Healthcare Nurses, Therapists</td><td><span class="risk-lo">▲ LOW</span></td><td>Growing rapidly — AI augments</td><td>Nurse practitioners projected to grow 52% from 2023–2033. AI handles diagnostics and admin; human care roles expand</td></tr>
+          <tr><td>Cybersecurity Analysts</td><td><span class="risk-lo">▲ LOW</span></td><td>Exploding demand</td><td>32% growth in information security analyst jobs 2022–2032. Cybersecurity professionals demand up 38% in past year</td></tr>
+          <tr><td class="new-role">AI Engineer / ML Engineer</td><td><span class="risk-lo">▲ NEW</span></td><td>Fastest-growing role globally</td><td>+140% demand growth. Among the top-paying new roles. Job postings mentioning agentic AI grew 985% between 2023 and 2024</td></tr>
+          <tr><td class="new-role">AI Product Manager</td><td><span class="risk-lo">▲ NEW</span></td><td>Rapidly emerging</td><td>+35–110% growth. Combines domain expertise with AI deployment knowledge. Every firm building proprietary AI needs them</td></tr>
+          <tr><td class="new-role">Prompt Engineer / AI Evaluator</td><td><span class="risk-lo">▲ NEW</span></td><td>Emerging standard role</td><td>Now standard at every major AI-deploying firm. Roles include "human in the loop" validators, AI output reviewers, agent supervisors</td></tr>
+          <tr><td class="new-role">Big Data / AI Strategy Specialist</td><td><span class="risk-lo">▲ NEW</span></td><td>Largest net job growth 2025–2030</td><td>WEF: Big Data Specialist is the fastest net-growing role worldwide between 2025–2030</td></tr>
+          <tr><td class="new-role">Agent Manager / CHRO of AI</td><td><span class="risk-lo">▲ NEW</span></td><td>Emerging C-suite and mid-level role</td><td>Gartner: 36% of managers expect to manage digital agents within 5 years. Josh Bersin's HR 2030: HRBPs become "agent managers"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-h">Who Is Most Exposed? Displacement Risk by Group</div>
+      <div class="chart-sub">Risk concentration data · <a href="https://www.goldmansachs.com/insights/articles/how-will-ai-affect-the-global-workforce" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.goldmansachs.com/insights/articles/how-will-ai-affect-the-global-workforce" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Goldman Sachs 2025</a></a> · IMF SDN/2026/001 · National University AI Job Stats 2026</div>
+      <div class="bar-row"><div class="bar-lbl">Early-career (22–25) in AI-exposed roles</div><div class="bar-track"><div class="bar-fill bf-r" data-w="80">−16% relative employment decline</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Women's jobs at highest AI risk (high-income)</div><div class="bar-track"><div class="bar-fill bf-r" data-w="64">9.6% severely exposed (vs 3.2% men)</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">US jobs at risk if AI fully adopted</div><div class="bar-track"><div class="bar-fill bf-g" data-w="47">6–7% of US workforce (Goldman Sachs)</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">US workers who already lost job to AI</div><div class="bar-track"><div class="bar-fill bf-i" data-w="28">13.7% of US workers (<a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">DataRefs 2026</a></a>)</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Tech workers aged 20–30 unemployment rise</div><div class="bar-track"><div class="bar-fill bf-r" data-w="30">+3pp since start of 2025 (Goldman Sachs)</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">Jobs AI will CREATE more jobs than destroy (by 2028)</div><div class="bar-track"><div class="bar-fill bf-gr" data-w="78">Gartner projection: net job creator</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 8 — AI BY INDUSTRY (DROPDOWN)
+═══════════════════════════════════════════════════════ -->
+<div id="industry" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 07</div>
+    <h2 class="sh">AI Adoption by Industry</h2>
+    <p class="sl">Select a sector below to see its AI adoption rate, top use cases, key statistics, and what it means for professional services firms advising in that space.</p>
+
+    <div class="industry-shell">
+      <div class="industry-select-bar">
+        <label>Select Industry Sector →</label>
+        <select id="industrySelect" onchange="showIndustry(this.value)">
+          <option value="">— Choose a sector —</option>
+          <option value="fs">Financial Services & Banking</option>
+          <option value="healthcare">Healthcare & Life Sciences</option>
+          <option value="tech">Technology & Telecommunications</option>
+          <option value="manufacturing">Manufacturing & Supply Chain</option>
+          <option value="retail">Retail & Consumer</option>
+          <option value="energy">Energy & Utilities</option>
+          <option value="ps">Professional Services (Consulting, Legal, Audit)</option>
+          <option value="govt">Government & Public Sector</option>
+          <option value="media">Media, Entertainment & Education</option>
+        </select>
+      </div>
+
+      <!-- Financial Services -->
+      <div class="industry-panel" id="ind-fs">
+        <div class="ind-header"><div class="ind-title">💰 Financial Services & Banking</div><div class="ind-badge" style="background:#1B4D8E;">Leading Adopter · $20B+ AI Spend 2025</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#1B4D8E;">$20B+</div><div class="ind-stat-l">Global annual AI spend in financial services (2025)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">80%</div><div class="ind-stat-l">Of ISVs expected to embed GenAI in finance apps by 2026 (Gartner)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--red);">$170B</div><div class="ind-stat-l">Global bank profits at risk for non-adapters (McKinsey)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">4.7%</div><div class="ind-stat-l">Productivity boost from GenAI in financial services by 2026 (PwC)</div></div>
+        </div>
+        <div class="ind-body">Banking leads in absolute AI investment and adoption depth. AI processes millions of transactions per second for fraud detection, and 68% of hedge funds use AI for market analysis and trading. The sector projects $200B–$340B in annual revenue added from GenAI. First movers will gain a 4% return on tangible equity advantage over slow movers (McKinsey).</div>
+        <ul class="ind-bullets">
+          <li>KYC/AML compliance: Deloitte case study — 90% reduction in onboarding time, 30% staff workload cut</li>
+          <li>Credit risk memos: US bank using AI agents achieved 20–60% productivity gain, 30% faster turnaround</li>
+          <li>Agentic AI: PwC reports 80% cycle time reduction in PO transaction processing</li>
+          <li>Wealth management: robo-advisors now manage over $1.2 trillion in assets globally</li>
+          <li>Wall Street banks expect to cut ~200,000 roles in back-office over 3–5 years</li>
+        </ul>
+        <div class="ind-src">Sources: <a href="https://highpeaksw.com/research-insights-the-state-of-ai-2025-top-industries-involved-in-ai-adoption/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://highpeaksw.com/research-insights-the-state-of-ai-2025-top-industries-involved-in-ai-adoption/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">High Peak Software State of AI 2026</a></a> · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Neurons Lab Agentic AI Apr 2026</a></a> · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">McKinsey Banking AI</a></a> · <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">PwC GenAI in Financial Services 2025</a></a></div>
+      </div>
+
+      <!-- Healthcare -->
+      <div class="industry-panel" id="ind-healthcare">
+        <div class="ind-header"><div class="ind-title">🏥 Healthcare & Life Sciences</div><div class="ind-badge" style="background:#2D7A3A;">Fastest Growth · 36.8% CAGR</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#2D7A3A;">36.8%</div><div class="ind-stat-l">CAGR in healthcare AI adoption — fastest of any sector</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">$122B</div><div class="ind-stat-l">Medical AI market size projected by 2035</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">100%</div><div class="ind-stat-l">Of healthcare payer CIOs report AI/ML will be implemented in their systems by 2026</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--ink);">+52%</div><div class="ind-stat-l">Projected growth for nurse practitioners 2023–2033 — AI augments, not replaces care roles</div></div>
+        </div>
+        <div class="ind-body">Healthcare leads AI investment growth with applications ranging from diagnostic imaging (matching radiologist accuracy) to drug discovery, clinical documentation, and patient management. AI handles 42% of initial patient inquiries in major healthcare networks. Healthcare captures nearly half of all vertical AI spend — approximately $1.5 billion in 2025, more than tripling from $450M the prior year.</div>
+        <ul class="ind-bullets">
+          <li>Clinical documentation: AI reduces physician administrative burden significantly, cutting burnout risk</li>
+          <li>Drug discovery: AI predicts molecular interactions, accelerating pharmaceutical R&D by years</li>
+          <li>Diagnostic imaging: deep learning detects diseases in X-rays, MRIs, and CT scans at near-radiologist accuracy</li>
+          <li>79% of healthcare payer executives will adopt GenAI tools by 2026 (High Peak Software)</li>
+          <li>Regulatory AI: KPMG's Clara AI targets healthcare audit and compliance workflows specifically</li>
+        </ul>
+        <div class="ind-src">Sources: <a href="https://www.secondtalent.com/resources/industries-seeing-the-fastest-ai-adoption-rates/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.secondtalent.com/resources/industries-seeing-the-fastest-ai-adoption-rates/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Second Talent Industry AI Adoption 2026</a></a> · High Peak Software State of AI 2026 · <a href="https://www.netguru.com/blog/ai-adoption-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.netguru.com/blog/ai-adoption-statistics" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">AI Adoption Statistics Netguru 2025</a></a></div>
+      </div>
+
+      <!-- Technology -->
+      <div class="industry-panel" id="ind-tech">
+        <div class="ind-header"><div class="ind-title">💻 Technology & Telecommunications</div><div class="ind-badge" style="background:#5A2D82;">Highest Absolute Adoption · 78–94%</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#5A2D82;">94%</div><div class="ind-stat-l">Tech sector AI adoption rate — leads all industries in absolute deployment</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">41%</div><div class="ind-stat-l">Of all code now written by AI coding assistants; 50% of devs use AI tools daily</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">$4.7T</div><div class="ind-stat-l">Gross value projected from AI in IT and telecom by 2035</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--red);">48%</div><div class="ind-stat-l">Telecom firms leading agentic AI adoption — highest of any sector (McKinsey 2026)</div></div>
+        </div>
+        <div class="ind-body">Technology companies have the highest absolute AI adoption rates globally. The sector benefits from technical expertise, data infrastructure, and a culture of experimentation. Telecoms rank #1 in agentic AI adoption at 48%, using AI to manage complex networks, predict congestion, and automate customer support. The AI-RAN Alliance is accelerating fusion of AI and cellular technology.</div>
+        <ul class="ind-bullets">
+          <li>Software development: AI coding assistants write 41% of all code — GitHub Copilot, Cursor, Claude Code reshaping how developers work</li>
+          <li>Network optimization: AI dynamically reroutes capacity based on real-time traffic patterns without human intervention</li>
+          <li>Customer support bots handle ~65% of initial inquiries at major telecom providers</li>
+          <li>Churn prediction systems flag subscribers likely to switch based on usage trend analysis</li>
+          <li>Agentic AI adoption in telecom: 48% — highest sector rate globally (McKinsey)</li>
+        </ul>
+        <div class="ind-src">Sources: High Peak Software State of AI 2026 · <a href="https://www.mezzi.com/blog/ai-adoption-rates-by-industry-trends-2025" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.mezzi.com/blog/ai-adoption-rates-by-industry-trends-2025" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Mezzi AI Adoption by Industry 2025</a></a> · McKinsey State of AI 2025</div>
+      </div>
+
+      <!-- Manufacturing -->
+      <div class="industry-panel" id="ind-manufacturing">
+        <div class="ind-header"><div class="ind-title">🏭 Manufacturing & Supply Chain</div><div class="ind-badge" style="background:#7D4E00;">High Disruption · 20M Jobs at Risk by 2030</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#7D4E00;">77%</div><div class="ind-stat-l">Of manufacturers now using AI solutions (up from 70% in 2024)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--red);">20M</div><div class="ind-stat-l">Manufacturing jobs globally projected to be lost to automation by 2030</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">−23%</div><div class="ind-stat-l">Downtime reduction from AI-powered process automation and quality control</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">3×</div><div class="ind-stat-l">More likely to improve KPIs for manufacturers applying ML (McKinsey)</div></div>
+        </div>
+        <div class="ind-body">Manufacturing is a key AI adopter for optimization, quality control, and predictive maintenance. AI-driven supply chain optimization predicts disruptions and suggests alternative sourcing strategies in real time. While 20M jobs face automation risk, skilled trades, installation, and maintenance roles remain at low risk and are in growing demand.</div>
+        <ul class="ind-bullets">
+          <li>Predictive maintenance: AI monitors equipment and flags failures before they occur, reducing downtime by 23%</li>
+          <li>Quality control: computer vision systems detect defects faster and more consistently than human inspection</li>
+          <li>Supply chain: AI predicts disruptions and optimises sourcing in real time across global supplier networks</li>
+          <li>72% of manufacturers report reduced costs and improved efficiency post-AI implementation (McKinsey)</li>
+          <li>Robot density has doubled globally in 7 years; 80% of robot installations concentrated in China, Japan, US, Korea, Germany</li>
+        </ul>
+        <div class="ind-src">Sources: McKinsey State of AI 2025 · WEF Future of Jobs 2025 · <a href="https://codewave.com/insights/ai-adoption-industry-trends-insights/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://codewave.com/insights/ai-adoption-industry-trends-insights/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">AI Adoption by Industry Codewave 2026</a></a></div>
+      </div>
+
+      <!-- Retail -->
+      <div class="industry-panel" id="ind-retail">
+        <div class="ind-header"><div class="ind-title">🛍️ Retail & Consumer</div><div class="ind-badge" style="background:#C0392B;">High Volume AI · 77% Adoption</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#C0392B;">77%</div><div class="ind-stat-l">Of retail organisations using AI solutions — among the highest adoption rates</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">47%</div><div class="ind-stat-l">Agentic AI adoption in retail/CPG — second highest after telecoms (McKinsey)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">+33%</div><div class="ind-stat-l">Faster position filling during peak seasons for retail orgs using AI recruitment</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--red);">65%</div><div class="ind-stat-l">Automation risk for retail cashiers by 2025 via self-checkout and AI vision systems</div></div>
+        </div>
+        <div class="ind-body">Retail leads in customer-facing AI applications: personalised recommendations, inventory prediction, dynamic pricing, and demand forecasting. Agentic AI is second highest in retail/CPG at 47%. Amazon, Walmart, and Sam's Club lead deployment. AI-powered inventory predictions (Target case via Bain) improved efficiency and reshaped retail decision-making.</div>
+        <ul class="ind-bullets">
+          <li>Personalisation: AI recommendation engines drive significant conversion improvements across e-commerce</li>
+          <li>Demand forecasting: AI reduces overstock and stockout incidents by predicting demand with unprecedented accuracy</li>
+          <li>Autonomous checkout: Walmart self-checkout projected to replace 8,000 positions; Sam's Club AI could eliminate 12,000 cashier roles</li>
+          <li>Paradox's AI chatbot reduced store-manager hiring time by ~4 hours/week at a major retail chain</li>
+          <li>Retail AI recruitment fills positions 33% faster during peak seasons</li>
+        </ul>
+        <div class="ind-src">Sources: McKinsey State of AI 2025 · <a href="https://careertrainer.ai/en/reports/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://careertrainer.ai/en/reports/ai-in-recruitment-statistics/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">CareerTrainer.ai AI Recruitment Stats 2026</a></a> · <a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.datarefs.com/statistics/ai/ai-job-replacement/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">AI Job Replacement Statistics DataRefs 2026</a></a></div>
+      </div>
+
+      <!-- Energy -->
+      <div class="industry-panel" id="ind-energy">
+        <div class="ind-header"><div class="ind-title">⚡ Energy & Utilities</div><div class="ind-badge" style="background:#2D7A3A;">Fast Emerging · Green Transition Driver</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#2D7A3A;">98%</div><div class="ind-stat-l">Of industrial companies expect digital technologies including AI to increase operational efficiency (PwC)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">3–4%</div><div class="ind-stat-l">Of global electricity will be consumed by AI data centres by 2026 — 4× the UK's annual consumption</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">+9M</div><div class="ind-stat-l">New jobs in green transition roles expected by 2030 (WEF) — renewable energy engineers among fastest-growing</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--ink);">$401B</div><div class="ind-stat-l">Additional AI infrastructure spending forecast for 2026 as providers scale energy-hungry systems</div></div>
+        </div>
+        <div class="ind-body">Energy and utilities face a dual AI role: as a massive consumer of AI-driven power (data centres) and as a sector being transformed by AI for grid management, predictive maintenance, and renewable energy optimisation. AI is central to the green transition, with wind, solar, and grid operators using ML models to balance supply and demand in real time.</div>
+        <ul class="ind-bullets">
+          <li>Grid management: AI balances renewable intermittency with demand-side management in real time</li>
+          <li>Predictive maintenance: AI reduces unplanned downtime in power generation and distribution infrastructure</li>
+          <li>Renewable energy engineers are among the WEF's fastest-growing roles by 2030</li>
+          <li>TCS committed $6.5B in AI data centre investment — directly impacting energy infrastructure demand</li>
+          <li>AI-driven energy optimisation in data centres themselves is a major efficiency priority for all AI firms</li>
+        </ul>
+        <div class="ind-src">Sources: WEF Future of Jobs 2025 · <a href="https://highpeaksw.com/research-insights-the-state-of-ai-2025-top-industries-involved-in-ai-adoption/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://highpeaksw.com/research-insights-the-state-of-ai-2025-top-industries-involved-in-ai-adoption/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">High Peak Software AI State 2026</a></a> · <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">PwC Industrial AI 2025</a></a> · <a href="https://www.coherentsolutions.com/insights/ai-adoption-trends-you-should-not-miss-2025" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.coherentsolutions.com/insights/ai-adoption-trends-you-should-not-miss-2025" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">AI Adoption Statistics Coherent Solutions 2025</a></a></div>
+      </div>
+
+      <!-- Professional Services -->
+      <div class="industry-panel" id="ind-ps">
+        <div class="ind-header"><div class="ind-title">🏛️ Professional Services (Consulting, Legal, Audit)</div><div class="ind-badge" style="background:var(--ink);">Existential Shift · Billable Hour Under Threat</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">71%</div><div class="ind-stat-l">PS firms with active GenAI implementation in 2024 — up from 33% in 2023</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--red);">8.7%</div><div class="ind-stat-l">Annual revenue growth for value-based pricing firms vs 2.1% for hourly-billing firms (Deloitte Benchmark 2025)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">40%</div><div class="ind-stat-l">Projected AI consulting share of total PS revenue by 2026</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--ink);">50–80%</div><div class="ind-stat-l">Reduction in document review time at law firms using AI — Gartner identifies legal as highest-demand GenAI sector</div></div>
+        </div>
+        <div class="ind-body">Professional services faces a structural paradox: AI efficiency directly reduces billable hours under traditional pricing. The sector is simultaneously the most disrupted and best positioned to lead client transformation. Firms retaining hourly billing grow at 2.1%; those on value-based models at 8.7%. Allen & Overy saw a 23% profit-per-partner increase after shifting 40% of contract work to AI-augmented fixed-fee pricing.</div>
+        <ul class="ind-bullets">
+          <li>Legal: GenAI has highest demand in legal services (Gartner). Document review time cut 50–80%</li>
+          <li>Audit: EY AI-augmented audits 35% faster; 22% more material issues identified. KIBR developing AI-specific audit standards for 2026–2027</li>
+          <li>Management consulting: BCG $3.6B AI revenue (25% of total); McKinsey 40% of client work includes AI; Bain majority of projects use GenAI</li>
+          <li>Pricing disruption: firms capturing 10–20% of potential pipeline due to staffing constraints; AI-enabled delivery could push this to 70–90%</li>
+          <li>Governance opportunity: 2026 sees industry-specific AI ethics standards emerge; first-movers in certification gain client trust premium</li>
+        </ul>
+        <div class="ind-src">Sources: <a href="https://www.bpm.com/insights/professional-services-industry-outlook-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.bpm.com/insights/professional-services-industry-outlook-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">BPM Industry Outlook Feb 2026</a></a> · <a href="https://thinking.inc/en/industry-service/ai-in-professional-services/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://thinking.inc/en/industry-service/ai-in-professional-services/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Deloitte PS Benchmark 2025</a></a> · <a href="https://thinking.inc/en/industry-service/ai-in-professional-services/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://thinking.inc/en/industry-service/ai-in-professional-services/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">The Thinking Company Mar 2026</a></a> · EY Audit Quality Report 2025</div>
+      </div>
+
+      <!-- Government -->
+      <div class="industry-panel" id="ind-govt">
+        <div class="ind-header"><div class="ind-title">🏛️ Government & Public Sector</div><div class="ind-badge" style="background:#444;">Cautious Adopter · Governance Priority</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#444;">~25%</div><div class="ind-stat-l">Of government agencies actively using AI in core operations (estimated, varies by country)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">81.3%</div><div class="ind-stat-l">GenAI average adoption rate across industries — government lags but is accelerating in 2026</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">+19M</div><div class="ind-stat-l">New jobs from digital access expansion (broadband, digital government) expected by 2030 (WEF)</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--red);">23</div><div class="ind-stat-l">AI-related GDPR investigations opened by UODO (Poland) in professional services in 2025 alone — regulatory scrutiny intensifying globally</div></div>
+        </div>
+        <div class="ind-body">Government AI adoption is characterised by caution, compliance, and sequenced deployment. EY's NVIDIA/on-prem strategy directly targets regulated government use cases. The EU AI Act (2026), NYC Local Law 144, and emerging ISO standards are reshaping procurement and deployment requirements. NHS (UK) has engaged Infosys to leverage AI for operational streamlining.</div>
+        <ul class="ind-bullets">
+          <li>Procurement: AI streamlines vendor assessment, contract management, and compliance documentation</li>
+          <li>Benefits administration: agentic AI handles eligibility checks, routing, and status updates without human initiation</li>
+          <li>EY positions itself as sovereign AI leader for government — on-prem infrastructure avoids data sovereignty concerns</li>
+          <li>EU AI Act effective 2026: mandates transparency, bias auditing, and human oversight for high-risk AI systems in public services</li>
+          <li>Infosys NHS engagement: AI to streamline operations and improve patient care for UK citizens</li>
+        </ul>
+        <div class="ind-src">Sources: BPM Industry Outlook Feb 2026 · Consulting Huber 2026 · WEF Future of Jobs 2025 · Infosys SEC 6-K FY2025</div>
+      </div>
+
+      <!-- Media -->
+      <div class="industry-panel" id="ind-media">
+        <div class="ind-header"><div class="ind-title">🎬 Media, Entertainment & Education</div><div class="ind-badge" style="background:#8E44AD;">Rapid Transformation · Content & Learning AI</div></div>
+        <div class="ind-stats">
+          <div class="ind-stat"><div class="ind-stat-n" style="color:#8E44AD;">195%</div><div class="ind-stat-l">YoY growth in GenAI course enrollments on Coursera in 2025 — 8M+ total learners; 700+ new courses in 12 months</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--gold);">71%</div><div class="ind-stat-l">Of L&D professionals already exploring or integrating AI into their learning programmes</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--teal);">130%</div><div class="ind-stat-l">Growth in AI content creator positions — generative AI in the workplace also creates new creative roles</div></div>
+          <div class="ind-stat"><div class="ind-stat-n" style="color:var(--ink);">51%</div><div class="ind-stat-l">Of career development champions are "accelerating or leading" in GenAI adoption vs 36% of others</div></div>
+        </div>
+        <div class="ind-body">Media and education are being fundamentally reshaped. Generative AI is disrupting content creation at scale — AI content creators grew 130%, while AI is handling increasing proportions of article, image, and video generation. In education, personalised AI learning paths and skills intelligence platforms are becoming the new operating model for corporate L&D.</div>
+        <ul class="ind-bullets">
+          <li>Content generation: AI now produces a significant and growing share of online articles and marketing content</li>
+          <li>Personalised learning: AI delivers role-specific training pathways that adapt to pace, goals, and performance in real time</li>
+          <li>Skills intelligence platforms becoming standard: skills data mapped across hiring, performance, and learning initiatives</li>
+          <li>GenAI course enrollments doubled YoY on Coursera; Latin America grew 425%, Africa 134%, North America 135%</li>
+          <li>Video and audio AI: deepfake detection is now a mandatory requirement for hiring platforms and media verification</li>
+        </ul>
+        <div class="ind-src">Sources: LinkedIn Workplace Learning Report 2025 · WEF Future of Jobs 2025 · TalentLMS 2026 L&D Report · Absorb LMS 2026</div>
+      </div>
+
+      <!-- Default message -->
+      <div class="industry-panel active" id="ind-default" style="padding:2rem 1.5rem;text-align:center;color:var(--mid);">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">☝️</div>
+        <p style="font-size:0.85rem;">Select an industry from the dropdown above to see sector-specific AI data, use cases, and EY advisory implications.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 9 — PREDICTIONS
+═══════════════════════════════════════════════════════ -->
+<div id="predictions" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 08</div>
+    <h2 class="sh">AI in HR: What Research<br>Predicts by 2030</h2>
+    <p class="sl">Forward-looking predictions from Gartner, Salesforce, Deloitte, Josh Bersin, ADP, Gloat and McKinsey — peer-reviewed and survey-backed projections, not speculation.</p>
+
+    <div class="pred-grid">
+      <div class="pred-card"><div class="pred-wm">26</div><div class="pred-yr" style="background:var(--gold);">2026–2027</div><div class="pred-h">Agentic HR Adoption Explodes</div><div class="pred-b">CHROs project 327% growth in agent adoption by 2027 — from 15% to 64%. By 2027, half of all companies using GenAI will launch agentic AI apps for complex, multi-step work. HR is the primary deployment zone: onboarding, PTO, payroll, and HCM analytics all become agent-managed without human triggers.</div><div class="pred-stat">327%</div><div class="pred-src">📄 Salesforce CHRO Research 2025 · <a href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Deloitte Emerging Tech 2025</a></a> · ADP HR Trends 2026</div></div>
+      <div class="pred-card"><div class="pred-wm">26</div><div class="pred-yr" style="background:var(--gold);">2026–2027</div><div class="pred-h">25% of Workforce Redeployed</div><div class="pred-b">CHROs expect to redeploy nearly 25% of their total workforce as digital labour absorbs administrative, operational, and analytical tasks. Customer service, finance, and operations teams will shrink. Redeployed workers move to relationship-building, partnerships, and roles requiring human judgment and empathy.</div><div class="pred-stat">~25%</div><div class="pred-src">📄 <a href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Salesforce State of HR Research 2025</a></a> · ADP HR Technology Trends 2026</div></div>
+      <div class="pred-card"><div class="pred-wm">28</div><div class="pred-yr" style="background:var(--teal);">2027–2028</div><div class="pred-h">The Diamond Org Replaces the Pyramid</div><div class="pred-b">Consulting and PS firms shift from pyramid (many juniors, few seniors) to diamond-shaped organisations. By 2028, 33% of enterprise software will include agentic AI (Gartner). Entry-level roles shift from generalist task execution to agent supervision, output validation, and AI-assisted client delivery.</div><div class="pred-stat">33%</div><div class="pred-src">📄 <a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner Agentic AI Prediction 2025</a></a> · FutureOfConsulting.ai Jan 2026</div></div>
+      <div class="pred-card"><div class="pred-wm">28</div><div class="pred-yr" style="background:var(--teal);">2027–2028</div><div class="pred-h">AI Agents Outnumber Human Salespeople 10:1</div><div class="pred-b">Gartner forecasts AI agents outnumber human salespeople 10:1 by 2028. Salesforce's Benioff: "Today's CEOs are the last generation to manage all-human workforces." HR must define how human and agent performance is jointly assessed via Human-Agent Ratio (HAR) metrics.</div><div class="pred-stat">10:1</div><div class="pred-src">📄 <a href="https://www.webpronews.com/ais-hr-reckoning-10-pivotal-shifts-reshaping-workforce-strategies-in-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.webpronews.com/ais-hr-reckoning-10-pivotal-shifts-reshaping-workforce-strategies-in-2026/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner 2026 Predictions</a></a> · WebProNews Jan 2026 · Salesforce CEO public statement</div></div>
+      <div class="pred-card"><div class="pred-wm">28</div><div class="pred-yr" style="background:var(--teal);">2027–2028</div><div class="pred-h">40% of Agentic Projects Will Fail</div><div class="pred-b">Gartner's cautionary prediction: over 40% of agentic AI projects cancelled by end of 2027 due to inadequate governance, escalating costs, and unclear business value. "Policy-as-code" and guardian agent frameworks are the response. Build governance before you scale.</div><div class="pred-stat">40%+</div><div class="pred-src">📄 <a href="https://www.adp.com/spark/articles/2025/12/key-hr-technology-trends-for-2026-and-how-to-plan.aspx" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.adp.com/spark/articles/2025/12/key-hr-technology-trends-for-2026-and-how-to-plan.aspx" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner Agentic AI Governance Prediction</a></a> · ADP HR Trends 2026</div></div>
+      <div class="pred-card"><div class="pred-wm">29</div><div class="pred-yr" style="background:var(--mid);">2028–2029</div><div class="pred-h">The HR–IT Merger</div><div class="pred-b">64% of IT leaders predict a complete HR–IT merger within 5 years. As agents interact with data across internal and external systems, the boundary between HR tech and enterprise AI infrastructure dissolves. A new role emerges: Chief People & Technology Officer.</div><div class="pred-stat">64%</div><div class="pred-src">📄 <a href="https://www.adp.com/spark/articles/2025/12/key-hr-technology-trends-for-2026-and-how-to-plan.aspx" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.adp.com/spark/articles/2025/12/key-hr-technology-trends-for-2026-and-how-to-plan.aspx" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">ADP HR Technology Trends Survey 2025 · AttendanceBot Agentic HR 2026</a></a></div></div>
+      <div class="pred-card"><div class="pred-wm">30</div><div class="pred-yr" style="background:var(--ink);">By 2030</div><div class="pred-h">50% of HR Activities Automated</div><div class="pred-b">Gartner's landmark prediction: 50% of current HR activities automated or performed by agents by 2030. This includes onboarding, compliance, payroll, performance aggregation, L&D recommendations, and basic talent analytics. The CHRO role pivots entirely to strategy, culture, and human development.</div><div class="pred-stat">50%</div><div class="pred-src">📄 <a href="https://www.hrdive.com/news/ai-is-transforming-hr-but-chros-cant-afford-to-lose-skills/813380/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://www.hrdive.com/news/ai-is-transforming-hr-but-chros-cant-afford-to-lose-skills/813380/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner HR Practice Research 2026 · HR Dive Mar 2026</a></a></div></div>
+      <div class="pred-card"><div class="pred-wm">30</div><div class="pred-yr" style="background:var(--ink);">By 2030</div><div class="pred-h">HRBPs Become Agent Managers</div><div class="pred-b">Josh Bersin's HR 2030 vision (Apr 2026): HR Business Partners will "steer agents to assist in local business needs." CHROs will build and manage Agentic HR architectures. AI agents continuously process external pay benchmarks, skills data, and regulatory feeds — HRBPs interpret and govern.</div><div class="pred-stat">HR 2030</div><div class="pred-src">📄 <a href="https://joshbersin.com/2026/04/introducing-hr-2030-a-vision-for-agentic-human-resources/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://joshbersin.com/2026/04/introducing-hr-2030-a-vision-for-agentic-human-resources/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Josh Bersin: "Introducing HR 2030: A Vision for Agentic Human Resources," Apr 2026 · joshbersin.com</a></a></div></div>
+      <div class="pred-card"><div class="pred-wm">30</div><div class="pred-yr" style="background:var(--ink);">By 2030</div><div class="pred-h">AI-Free Assessments Become Standard</div><div class="pred-b">Gartner: atrophy of critical-thinking skills due to GenAI will push 50% of organisations to require "AI-free" skills assessments by 2026 — becoming industry standard by 2030. HR must simultaneously scale AI fluency and protect the human cognitive skills that remain irreplaceable: judgment, empathy, creativity, ethical reasoning.</div><div class="pred-stat">50%</div><div class="pred-src">📄 <a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gartner Strategic Predictions 2026</a></a> · <a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Gloat AI Workforce Trends Mar 2026</a></a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PANEL 10 — SOURCES
+═══════════════════════════════════════════════════════ -->
+<div id="src-panel" class="panel">
+  <div class="sources-bg">
+    <div style="max-width:1140px;margin:0 auto;">
+      <div class="eyebrow">Reference Sources</div>
+      <h2 class="sh">Trusted Research & Reference Links</h2>
+      <p class="sl">All primary sources used in this brief with direct links. Only tier-1 institutions, major consulting firms' own research, and peer-reviewed analyst reports are cited.</p>
+      <div class="sources-grid">
+        <div class="src-item"><div class="src-num">01</div><div class="src-org">World Economic Forum</div><div class="src-title">Future of Jobs Report 2025 — 1,000+ employers, 55 economies, 14M workers</div><a class="src-link" href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank">weforum.org/publications/the-future-of-jobs-report-2025</a><div class="src-date">January 2025</div></div>
+        <div class="src-item"><div class="src-num">02</div><div class="src-org">McKinsey & Company (QuantumBlack)</div><div class="src-title">The State of AI: How Organizations Are Rewiring to Capture Value</div><a class="src-link" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai</a><div class="src-date">March 2025</div></div>
+        <div class="src-item"><div class="src-num">03</div><div class="src-org">McKinsey & Company</div><div class="src-title">How AI Is — and Isn't — Changing the Future of Work</div><a class="src-link" href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work" target="_blank">mckinsey.com · People & Org Blog</a><div class="src-date">April 2026</div></div>
+        <div class="src-item"><div class="src-num">04</div><div class="src-org">Deloitte</div><div class="src-title">Agentic AI Strategy: The Agentic Reality Check — Tech Trends 2026</div><a class="src-link" href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html" target="_blank">deloitte.com · Tech Trends 2026</a><div class="src-date">February 2026</div></div>
+        <div class="src-item"><div class="src-num">05</div><div class="src-org">PwC</div><div class="src-title">2026 AI Business Predictions — Annual CEO/exec forward-looking survey</div><a class="src-link" href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank">pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html</a><div class="src-date">2026</div></div>
+        <div class="src-item"><div class="src-num">06</div><div class="src-org">Gartner</div><div class="src-title">AI Revolution and Cost Pressures: Top Four Trends for Talent Acquisition 2026</div><a class="src-link" href="https://www.gartner.com/en/newsroom/press-releases/2025-10-07-gartner-says-ai-revolution-and-cost-pressures-are-two-forces-driving-the-top-four-trends-for-talent-acquisition-in-2026" target="_blank">gartner.com/en/newsroom · Oct 2025</a><div class="src-date">October 2025</div></div>
+        <div class="src-item"><div class="src-num">07</div><div class="src-org">Salesforce</div><div class="src-title">Agentic AI Impact on Workforce Research — 200 global CHRO executives surveyed</div><a class="src-link" href="https://www.salesforce.com/news/stories/agentic-ai-impact-on-workforce-research/" target="_blank">salesforce.com/news/stories/agentic-ai-impact-on-workforce-research</a><div class="src-date">May 2025</div></div>
+        <div class="src-item"><div class="src-num">08</div><div class="src-org">BPM</div><div class="src-title">Professional Services Industry Outlook 2026</div><a class="src-link" href="https://www.bpm.com/insights/professional-services-industry-outlook-2026/" target="_blank">bpm.com/insights/professional-services-industry-outlook-2026</a><div class="src-date">February 2026</div></div>
+        <div class="src-item"><div class="src-num">09</div><div class="src-org">Josh Bersin</div><div class="src-title">Introducing HR 2030: A Vision for Agentic Human Resources</div><a class="src-link" href="https://joshbersin.com/2026/04/introducing-hr-2030-a-vision-for-agentic-human-resources/" target="_blank">joshbersin.com/2026/04/introducing-hr-2030</a><div class="src-date">April 2026</div></div>
+        <div class="src-item"><div class="src-num">10</div><div class="src-org">ADP</div><div class="src-title">Key HR Technology Trends for 2026 — and How to Plan</div><a class="src-link" href="https://www.adp.com/spark/articles/2025/12/key-hr-technology-trends-for-2026-and-how-to-plan.aspx" target="_blank">adp.com/spark/articles/2025/12/key-hr-technology-trends-for-2026</a><div class="src-date">December 2025</div></div>
+        <div class="src-item"><div class="src-num">11</div><div class="src-org">Consulting Huber</div><div class="src-title">The Big Consulting AI Frameworks, Compared 2026 — 10 major firm benchmark</div><a class="src-link" href="https://consulting-huber.com/ai-consulting-frameworks-compared.html" target="_blank">consulting-huber.com/ai-consulting-frameworks-compared.html</a><div class="src-date">April 2026</div></div>
+        <div class="src-item"><div class="src-num">12</div><div class="src-org">Future of Consulting AI</div><div class="src-title">2026 Consulting's AI Revolution Update: Billions Spent, But the Old Pyramid Persists</div><a class="src-link" href="https://futureofconsulting.ai/ai-leadership/2026-consultings-ai-revolution-update/" target="_blank">futureofconsulting.ai/ai-leadership/2026-consultings-ai-revolution-update</a><div class="src-date">January 2026</div></div>
+        <div class="src-item"><div class="src-num">13</div><div class="src-org">Gloat</div><div class="src-title">10 Key AI Workforce Trends in 2026 — Future of Work Specialist research</div><a class="src-link" href="https://gloat.com/blog/ai-workforce-trends/" target="_blank">gloat.com/blog/ai-workforce-trends</a><div class="src-date">March 2026</div></div>
+        <div class="src-item"><div class="src-num">14</div><div class="src-org">Neurons Lab</div><div class="src-title">Agentic AI in Financial Services: A Research Roundup for 2026</div><a class="src-link" href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank">neurons-lab.com/article/agentic-ai-in-financial-services-2026</a><div class="src-date">April 2026</div></div>
+        <div class="src-item"><div class="src-num">15</div><div class="src-org">BCG / Bloomberg</div><div class="src-title">BCG Rode AI to $3.6B in Revenue — 25% of $14.4B 2025 total</div><a class="src-link" href="https://www.metaintro.com/blog/bcg-25-percent-ai-revenue-consulting-jobs-2026" target="_blank">metaintro.com/blog/bcg-25-percent-ai-revenue-consulting-jobs-2026</a><div class="src-date">April 2026 (Bloomberg disclosure)</div></div>
+        <div class="src-item"><div class="src-num">16</div><div class="src-org">TCS</div><div class="src-title">TCS Q3 FY26 Press Release — AI revenue, deal wins, TCS to the Power of AI</div><a class="src-link" href="https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q3-fy-2026" target="_blank">tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q3-fy-2026</a><div class="src-date">January 2026</div></div>
+        <div class="src-item"><div class="src-num">17</div><div class="src-org">Analytics India Mag</div><div class="src-title">TCS Posts $1.5B AI Revenue as it Aims to Become Largest AI Tech Services Firm</div><a class="src-link" href="https://analyticsindiamag.com/ai-news-updates/tcs-posts-1-5-bn-ai-revenue-as-it-aims-to-become-largest-ai-tech-services-firm/" target="_blank">analyticsindiamag.com · TCS Analyst Day 2025</a><div class="src-date">December 2025</div></div>
+        <div class="src-item"><div class="src-num">18</div><div class="src-org">Infosys (SEC Filing)</div><div class="src-title">Infosys Form 6-K FY2025 — Topaz AI, Topaz Fabric, 4,600 AI projects, 28M code lines</div><a class="src-link" href="https://www.sec.gov/Archives/edgar/data/0001067491/000106749126000004/exv99w03.htm" target="_blank">sec.gov · Infosys Form 6-K FY2025</a><div class="src-date">2025–2026</div></div>
+        <div class="src-item"><div class="src-num">19</div><div class="src-org">InfotechLead</div><div class="src-title">Infosys FY26 Revenue Hits $20.16B as AI Strategy Drives $14.9B Deal Wins</div><a class="src-link" href="https://infotechlead.com/software/infosys-fy26-revenue-hits-20-16-bn-as-ai-strategy-drives-14-9-bn-deal-wins-95361" target="_blank">infotechlead.com/infosys-fy26-revenue-hits-20-16-bn</a><div class="src-date">April 2026</div></div>
+        <div class="src-item"><div class="src-num">20</div><div class="src-org">Bain & Company</div><div class="src-title">Five Ways Bain is Leading with AI — Sage, OpenAI partnership, 19,000+ GPTs</div><a class="src-link" href="https://www.bain.com/careers/life-at-bain/careers-blog/five-ways-bain-is-leading-with-ai/" target="_blank">bain.com/careers/life-at-bain/careers-blog/five-ways-bain-is-leading-with-ai</a><div class="src-date">August 2025</div></div>
+        <div class="src-item"><div class="src-num">21</div><div class="src-org">AdAI Research</div><div class="src-title">Recruitment AI Statistics 2026 — updated quarterly</div><a class="src-link" href="https://adai.news/resources/statistics/recruitment-ai-statistics-2026/" target="_blank">adai.news/resources/statistics/recruitment-ai-statistics-2026</a><div class="src-date">March 2026</div></div>
+        <div class="src-item"><div class="src-num">22</div><div class="src-org">InCruiter</div><div class="src-title">AI in Recruitment 2026: Trends, Stats & What's Actually Working</div><a class="src-link" href="https://incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works/" target="_blank">incruiter.com/blog/ai-in-recruitment-2026-trends-stats-what-works</a><div class="src-date">April 2026</div></div>
+        <div class="src-item"><div class="src-num">23</div><div class="src-org">TalentLMS</div><div class="src-title">2026 L&D Report: The State of Workplace Learning — benchmark report</div><a class="src-link" href="https://www.talentlms.com/research/learning-development-report-2026" target="_blank">talentlms.com/research/learning-development-report-2026</a><div class="src-date">February 2026</div></div>
+        <div class="src-item"><div class="src-num">24</div><div class="src-org">Goldman Sachs</div><div class="src-title">How Will AI Affect the Global Workforce? — high-risk roles and labour market data</div><a class="src-link" href="https://www.goldmansachs.com/insights/articles/how-will-ai-affect-the-global-workforce" target="_blank">goldmansachs.com/insights/articles/how-will-ai-affect-the-global-workforce</a><div class="src-date">Updated August 2025</div></div>
+        <div class="src-item"><div class="src-num">25</div><div class="src-org">IMF (International Monetary Fund)</div><div class="src-title">New Jobs Creation in the AI Age — SDN/2026/001 — cross-country labour market analysis</div><a class="src-link" href="https://www.imf.org/-/media/files/publications/sdn/2026/english/sdnea2026001.pdf" target="_blank">imf.org · SDN/2026/001</a><div class="src-date">2026</div></div>
+        <div class="src-item"><div class="src-num">26</div><div class="src-org">Second Talent</div><div class="src-title">Top 10 Industries Seeing the Fastest AI Adoption Rates in 2026</div><a class="src-link" href="https://www.secondtalent.com/resources/industries-seeing-the-fastest-ai-adoption-rates/" target="_blank">secondtalent.com/resources/industries-seeing-the-fastest-ai-adoption-rates</a><div class="src-date">February 2026</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>AI Intelligence Brief · <strong>Edition 01 · May 2026</strong></div>
+  <div>Prepared for <strong>udit.bhatia@in.ey.com</strong> · Weekly cadence</div>
+  <div>26 tier-1 research sources verified · All links active as of May 2026</div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── Tab switching ──
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  // Find matching tab button
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach(b => { if(b.getAttribute('onclick').includes("'"+id+"'")) b.classList.add('active'); });
+  window.scrollTo({top:document.querySelector('.section-tabs').offsetTop - 50, behavior:'smooth'});
+  // Trigger any bar animations in newly shown panel
+  setTimeout(() => triggerBars(document.getElementById(id)), 100);
+}
+
+function goto(id) { showTab(id); }
+
+// ── Industry dropdown ──
+function showIndustry(val) {
+  document.querySelectorAll('.industry-panel').forEach(p => p.classList.remove('active'));
+  if(val) {
+    const el = document.getElementById('ind-'+val);
+    if(el) el.classList.add('active');
+  } else {
+    document.getElementById('ind-default').classList.add('active');
+  }
+}
+
+// ── Animate bars ──
+function triggerBars(container) {
+  if(!container) return;
+  container.querySelectorAll('.bar-fill[data-w]').forEach(bar => {
+    bar.style.width = bar.dataset.w + '%';
+  });
+  container.querySelectorAll('.skill-fill[data-h]').forEach(bar => {
+    bar.style.height = bar.dataset.h + '%';
+  });
+}
+
+// ── Intersection Observer for all panels ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) triggerBars(e.target); });
+}, {threshold:0.1});
+
+// Trigger overview bars on load
+setTimeout(() => triggerBars(document.getElementById('overview')), 300);
+
+// ── Scroll to top button ──
+const scrollBtn = document.getElementById('scrollBtn');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 300);
+});
+</script>
+</body>
+</html>
