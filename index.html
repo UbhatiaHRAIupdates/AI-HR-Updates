@@ -248,6 +248,13 @@ footer strong{color:var(--gold-lt);}
 .skill-pct{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--ink);}
 .skill-lbl{font-size:0.67rem;color:var(--mid);text-align:center;line-height:1.35;}
 
+/* ── PEOPLE & CULTURE SUB-NAV ── */
+.people-subnav{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line);}
+.spill{font-family:"IBM Plex Mono",monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;border:1px solid var(--line);background:white;color:var(--mid);cursor:pointer;border-radius:2px;transition:all .2s;}
+.spill:hover{border-color:var(--gold);color:var(--gold);}
+.spill.active{background:var(--gold);color:white;border-color:var(--gold);}
+.sub-pnl{display:block;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
   .top-bar .top-date{display:none;}
@@ -281,6 +288,7 @@ footer strong{color:var(--gold-lt);}
   <button class="tab-btn" onclick="showTab('firms')">🏛️ Big 4, MBB & IT Giants</button>
   <button class="tab-btn" onclick="showTab('jobs')">⚖️ Jobs at Risk vs New Roles</button>
   <button class="tab-btn" onclick="showTab('industry')">🏭 AI by Industry</button>
+  <button class="tab-btn" onclick="showTab('people')">🌱 People & Culture</button>
   <button class="tab-btn" onclick="showTab('predictions')">🔮 Predictions 2030</button>
   <button class="tab-btn" onclick="showTab('src-panel')">📎 Sources</button>
 </div>
@@ -847,6 +855,473 @@ footer strong{color:var(--gold-lt);}
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
+     PANEL NEW — PEOPLE & CULTURE (Onboarding / Leadership / DEI / Culture / Rewards)
+═══════════════════════════════════════════════════════ -->
+
+<div id="people" class="panel">
+  <div class="wrap">
+    <div class="eyebrow">Section 08 · New</div>
+    <h2 class="sh">People &amp; Culture Intelligence:<br>Onboarding · Leadership · DEI<br>Culture · Rewards &amp; Future Skills</h2>
+    <p class="sl">The most holistic lens in the brief — how the 10 benchmarked firms are rethinking how people join, how they lead, how they belong, how culture is built, and how future skills are incentivised across professional services.</p>
+
+    <div class="people-subnav">
+      <button class="spill active" id="sp-onboarding" onclick="showSub('onboarding')">🚀 Onboarding</button>
+      <button class="spill" id="sp-leadership" onclick="showSub('leadership')">🏆 Future Leadership</button>
+      <button class="spill" id="sp-dei" onclick="showSub('dei')">🌈 DEI</button>
+      <button class="spill" id="sp-culture" onclick="showSub('culture')">🏛 Culture &amp; Awards</button>
+      <button class="spill" id="sp-rewards" onclick="showSub('rewards')">💎 Rewards &amp; Future Skills</button>
+    </div>
+
+    <!-- ════════ ONBOARDING ════════ -->
+    <div id="pnl-onboarding" class="sub-pnl">
+      <div class="eyebrow" style="margin-top:0.5rem;">Onboarding · 2025–2026 Research</div>
+      <h3 class="sh" style="font-size:1.5rem;">AI-Powered Onboarding:<br>From Paperwork to Partnership</h3>
+      <p class="sl">Companies with robust AI onboarding see 82% better new hire retention and 40% faster time-to-productivity — the highest ROI of any HR technology investment in 2025.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--gold)">82%</div>
+          <div class="stat-l">Better new hire retention at organisations with robust AI onboarding vs traditional methods</div>
+          <div class="stat-s"><a href="https://www.infeedo.ai/blog/ai-powered-employee-onboarding-hr-guide-2025" target="_blank" style="color:var(--teal)">inFeedo AI Onboarding Report 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--teal)">53%</div>
+          <div class="stat-l">Faster onboarding completion reported using AI — alongside 75% reduction in HR admin workload</div>
+          <div class="stat-s"><a href="https://www.hrcloud.com/blog/ai-in-onboarding-guide-2026" target="_blank" style="color:var(--teal)">HR Cloud AI Onboarding Guide 2026</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--ink)">$18K</div>
+          <div class="stat-l">Average annual saving per company from AI-powered onboarding systems</div>
+          <div class="stat-s"><a href="https://www.infeedo.ai/blog/ai-powered-employee-onboarding-hr-guide-2025" target="_blank" style="color:var(--teal)">inFeedo / Second Talent 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--red)">68%</div>
+          <div class="stat-l">Of organisations now use AI in their hiring and onboarding — 92% of HR professionals work with AI-enhanced onboarding systems</div>
+          <div class="stat-s"><a href="https://www.infeedo.ai/blog/ai-powered-employee-onboarding-hr-guide-2025" target="_blank" style="color:var(--teal)">inFeedo AI Onboarding Report 2025</a></div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-no">01</div>
+          <div class="card-icon">🤖</div>
+          <div class="card-h">Agentic Onboarding Goes Live</div>
+          <div class="card-b">The 2026 model: agentic AI monitors progress and prompts action across HR, IT, managers and new hires simultaneously. Missed check-ins, delayed system access, and stalled learning all trigger automatic responses — no human follow-up required. Gartner estimates 40% of enterprise apps will use task-specific AI agents for onboarding orchestration by end of 2026, up from under 5% in 2025.</div>
+          <span class="tag">Agentic AI</span><span class="tag">Orchestration</span>
+          <div class="card-src"><a href="https://www.phenom.com/blog/onboarding-trends-ai-skills" target="_blank">📄 Phenom: 15 Onboarding Trends for 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">02</div>
+          <div class="card-icon">📋</div>
+          <div class="card-h">Preboarding Is the New Onboarding</div>
+          <div class="card-b">The window between offer acceptance and Day 1 has become a critical retention phase. AI delivers personalised cultural content, connects new hires with future teammates, and completes compliance paperwork before they arrive. Organisations with structured preboarding reduce early attrition by up to 25% and report new hires feeling productive 30% sooner — the biggest gains are in the first 90 days.</div>
+          <span class="tag">Preboarding</span><span class="tag">Retention</span>
+          <div class="card-src"><a href="https://enboarder.com/blog/future-onboarding-trends/" target="_blank">📄 Enboarder: Onboarding Trends 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">03</div>
+          <div class="card-icon">🎯</div>
+          <div class="card-h">Hyper-Personalisation at Scale</div>
+          <div class="card-b">AI platforms now assess a new hire's background, departmental needs, time zone, and compliance requirements — dynamically adjusting the pace and format of learning materials. By 2025, 70% of organisations will use AI for personalised employee experiences, making hyper-personalisation the expected standard. One-size-fits-all onboarding is already obsolete at leading firms.</div>
+          <span class="tag">Personalisation</span><span class="tag">Learning Pathways</span>
+          <div class="card-src"><a href="https://www.hrcloud.com/blog/ai-in-onboarding-guide-2026" target="_blank">📄 HR Cloud: AI in Onboarding 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">04</div>
+          <div class="card-icon">⚡</div>
+          <div class="card-h">Real-World Results: Named Case Studies</div>
+          <div class="card-b">Hitachi reduced onboarding time by 4 full days and cut HR involvement from 20 hours to 12 per new hire using an AI assistant. Texans Credit Union grants system access in under 1 minute via RPA — down from 15–20 minutes. O.C. Tanner saves $150K+ annually by automating compliance and provisioning. Mastercard automated 85% of interview scheduling — best practice now flowing into onboarding workflows.</div>
+          <span class="tag">Case Studies</span><span class="tag">ROI</span>
+          <div class="card-src"><a href="https://enboarder.com/blog/future-onboarding-trends/" target="_blank">📄 Enboarder / Business Insider 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">05</div>
+          <div class="card-icon">📊</div>
+          <div class="card-h">Predictive Flight-Risk Detection</div>
+          <div class="card-b">Analytics dashboards now surface new hires at risk of attrition within the first 90 days — before they become quiet quitters. Key signals tracked: completion rates, engagement levels, time-to-productivity, and behavioural patterns during onboarding. Gartner's October 2025 CHRO survey identified harnessing AI to revolutionise HR as the top priority for 2026 — with onboarding as the first deployment zone.</div>
+          <span class="tag">Predictive Analytics</span><span class="tag">Retention Risk</span>
+          <div class="card-src"><a href="https://www.phenom.com/blog/onboarding-trends-ai-skills" target="_blank">📄 Phenom: Onboarding Trends 2026 · Gartner CHRO Survey Oct 2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">06</div>
+          <div class="card-icon">🏢</div>
+          <div class="card-h">Firm-by-Firm: How Benchmarked Firms Onboard</div>
+          <div class="card-b"><strong>Deloitte:</strong> Positions PairD AI as a "new team member" from Day 1 — new joiners onboard alongside the AI. <strong>McKinsey:</strong> Mandatory 1-hour AI prompt training in week one, solving "prompt anxiety." <strong>Accenture:</strong> Role-specific AI onboarding pathways for its 77K AI practice. <strong>TCS:</strong> All 600K employees enrolled in "TCS to the Power of AI" annually. <strong>Infosys:</strong> Topaz Fabric agents handle compliance, access provisioning, and learning routing for 328K staff. <strong>BCG:</strong> New joiners paired with an AI "ground troop" change agent from day one.</div>
+          <span class="tag">Big 4 · MBB · Indian IT</span>
+          <div class="card-src"><a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank">📄 Plus.ai · Medium: AI Redefining Strategy Consulting 2025–2026</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ LEADERSHIP ════════ -->
+    <div id="pnl-leadership" class="sub-pnl" style="display:none">
+      <div class="eyebrow" style="margin-top:0.5rem;">Future Leadership · 2025–2026 Research</div>
+      <h3 class="sh" style="font-size:1.5rem;">Leadership in the AI Era:<br>Orchestrating Human + Machine Intelligence</h3>
+      <p class="sl">2026 marks the era of human + AI leadership. The question is not whether to adopt AI — it is whether organisations have leaders who can orchestrate hybrid human-agent teams, build psychological safety in uncertainty, and redesign work itself.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--gold)">43%</div>
+          <div class="stat-l">Only 43% of CEOs and boards are confident in their ability to attract and grow executive talent — making the leadership pipeline a core business vulnerability</div>
+          <div class="stat-s"><a href="https://www.unleash.ai/strategy-and-leadership/deloitte-heidrick-struggles-and-mclean-reflect-on-hr-in-2025-plus-what-must-be-top-of-the-to-do-list-in-2026/" target="_blank" style="color:var(--teal)">UNLEASH / Heidrick &amp; Struggles Dec 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--teal)">60%</div>
+          <div class="stat-l">Of Fortune 100 companies will appoint dedicated Heads of AI Governance in 2026 — embedding ethics into executive leadership structure</div>
+          <div class="stat-s"><a href="https://skylineg.com/resources/blog/how-ai-reshaping-executive-coaching" target="_blank" style="color:var(--teal)">Forrester / Skyline Group Jan 2026</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--ink)">50%+</div>
+          <div class="stat-l">Of US work hours could be automated by today's technology — making leadership's role in redesigning work more critical than the AI tools themselves</div>
+          <div class="stat-s"><a href="https://www.mckinsey.com/mgi/media-center/a-new-years-resolution-for-leaders-redesign-work-for-people-and-ai" target="_blank" style="color:var(--teal)">McKinsey Global Institute Jan 2026</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--red)">92%</div>
+          <div class="stat-l">Of CHROs expect greater AI integration — yet "leadership resilience" is the defining HR differentiator of 2026, more than any specific AI tool deployment</div>
+          <div class="stat-s"><a href="https://www.unleash.ai/strategy-and-leadership/deloitte-heidrick-struggles-and-mclean-reflect-on-hr-in-2025-plus-what-must-be-top-of-the-to-do-list-in-2026/" target="_blank" style="color:var(--teal)">SHRM / UNLEASH Dec 2025</a></div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-no">01</div>
+          <div class="card-icon">🧠</div>
+          <div class="card-h">The Human Leadership Imperative</div>
+          <div class="card-b">McKinsey (Jan 2026): "AI may transform how we work, but only human leaders can determine why we work and what we're trying to achieve." The highest-performing leaders protect 20% of their calendar for recovery and judgment — what one global tech CEO calls "catching their breath." Microsoft CEO Satya Nadella's principle: "If the next CEO can be more successful than me, I've done my job right."</div>
+          <span class="tag">Human Leadership</span><span class="tag">McKinsey MGI</span>
+          <div class="card-src"><a href="https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/building-leaders-in-the-age-of-ai" target="_blank">📄 McKinsey: Developing Human Leadership in the Age of AI · Jan 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">02</div>
+          <div class="card-icon">⚡</div>
+          <div class="card-h">Leadership Resilience as the #1 Differentiator</div>
+          <div class="card-b">Heidrick &amp; Struggles: "The defining HR trend of 2026 is enterprise-wide leadership resilience." Organisations win or lose based on how adaptable their leaders are. CHROs must sharpen their approach to identifying, developing, and retaining future leaders through predictive, data-driven leadership risk assessment — not annual review cycles.</div>
+          <span class="tag">Resilience</span><span class="tag">Leadership Risk</span>
+          <div class="card-src"><a href="https://www.unleash.ai/strategy-and-leadership/deloitte-heidrick-struggles-and-mclean-reflect-on-hr-in-2025-plus-what-must-be-top-of-the-to-do-list-in-2026/" target="_blank">📄 UNLEASH: Deloitte, Heidrick &amp; Struggles Dec 2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">03</div>
+          <div class="card-icon">🤝</div>
+          <div class="card-h">Orchestrating Human-Agent Teams</div>
+          <div class="card-b">McKinsey CEO Bob Sternfels: every employee will soon be enabled by one or more agents — "simultaneously human and agentic." His firm's AI agent fleet grew 500% in 18 months, reaching 20,000 agents. Gartner predicts 36% of managers will manage digital agents within 5 years. Leaders must master new capabilities: agent oversight, AI output validation, ethical decision routing, and building trust in human-machine collaboration.</div>
+          <span class="tag">Agentic Leadership</span><span class="tag">Manager Evolution</span>
+          <div class="card-src"><a href="https://fortune.com/2026/01/22/deloitte-job-title-change-ai-reshapes-big-4-accounting-consulting-firms/" target="_blank">📄 Fortune: McKinsey CEO / Deloitte Job Titles Jan 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">04</div>
+          <div class="card-icon">📐</div>
+          <div class="card-h">Six New Leadership Competencies for 2026</div>
+          <div class="card-b">IMD Business School identifies the capabilities that distinguish AI-era leaders: (1) <strong>AI Orchestration</strong> — directing hybrid human-agent teams; (2) <strong>Ethical Navigation</strong> — values-aligned decisions under AI uncertainty; (3) <strong>Adaptive Cognition</strong> — learning faster than tools change; (4) <strong>Psychological Safety</strong> — managing fear and ambiguity; (5) <strong>Data Fluency</strong> — critically interpreting AI outputs; (6) <strong>Empathetic Accountability</strong> — maintaining human dignity in restructured organisations.</div>
+          <span class="tag">Competency Framework</span><span class="tag">IMD Research</span>
+          <div class="card-src"><a href="https://www.imd.org/ibyimd/artificial-intelligence/2026-ai-trends-what-leaders-need-to-know-to-stay-competitive/" target="_blank">📄 IMD: 2026 AI Trends — What Leaders Need to Know · Dec 2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">05</div>
+          <div class="card-icon">🏢</div>
+          <div class="card-h">Firm-by-Firm: Leadership Development Moves</div>
+          <div class="card-b"><strong>Deloitte:</strong> Scrapped traditional job titles (analyst → consultant → manager) across 181,500 US staff in Jan 2026 — new "Leaders" class created. <strong>McKinsey:</strong> Connected Leaders Academy (CLA) — award-winning, learning-science-powered leadership development. <strong>EY:</strong> IDC MarketScape leader in culture and governance advisory. <strong>BCG:</strong> 1,200 AI ground troops modelling AI-fluent leadership daily. <strong>Bain:</strong> AI Aspire (Andrew Ng) trains leaders in AI-native decision-making. <strong>TCS/Infosys:</strong> Leadership tied to AI programme delivery KPIs.</div>
+          <span class="tag">Firm Intelligence</span><span class="tag">Programme Design</span>
+          <div class="card-src"><a href="https://fortune.com/2026/01/22/deloitte-job-title-change-ai-reshapes-big-4-accounting-consulting-firms/" target="_blank">📄 Fortune Jan 2026 · Plus.ai · Consulting Huber 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">06</div>
+          <div class="card-icon">🌐</div>
+          <div class="card-h">HR–IT Partnership: Non-Negotiable in 2026</div>
+          <div class="card-b">McLean &amp; Company: "HR's partnership with IT will make or break AI transformation in 2026." Deloitte confirms the shift to enterprise-wide collaboration will accelerate — HR must step into a central leadership role as organisations redesign work for human-machine convergence. 64% of IT leaders predict a complete HR–IT merger within 5 years (ADP 2025). The new title emerging: Chief People &amp; Technology Officer.</div>
+          <span class="tag">CHRO + CIO</span><span class="tag">Merger Trend</span>
+          <div class="card-src"><a href="https://www.unleash.ai/strategy-and-leadership/deloitte-heidrick-struggles-and-mclean-reflect-on-hr-in-2025-plus-what-must-be-top-of-the-to-do-list-in-2026/" target="_blank">📄 McLean &amp; Company / UNLEASH Dec 2025</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ DEI ════════ -->
+    <div id="pnl-dei" class="sub-pnl" style="display:none">
+      <div class="eyebrow" style="margin-top:0.5rem;">DEI · 2025–2026 Research</div>
+      <h3 class="sh" style="font-size:1.5rem;">DEI in the AI Age:<br>Progress, Pressure &amp; Firm Benchmarks</h3>
+      <p class="sl">DEI spending is projected to double to $15.4B by 2026, yet progress remains slow. AI introduces both risk — amplifying bias in hiring and performance decisions — and opportunity — reducing human bias when properly governed.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--gold)">$15.4B</div>
+          <div class="stat-l">Global corporate DEI spending projected by 2026 — doubling from $7.5B in 2020. Yet 151 years still needed to close the global gender gap at current rate</div>
+          <div class="stat-s"><a href="https://www.weforum.org/stories/2023/01/dei-lighthouse-programme-heres-what-works-for-diversity-equity-inclusion-davos-2023/" target="_blank" style="color:var(--teal)">WEF / McKinsey DEI Lighthouse Programme</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--teal)">36%</div>
+          <div class="stat-l">More likely to outperform financially — companies with diverse executive teams vs non-diverse peers (McKinsey Diversity Wins, consistently refreshed through 2025)</div>
+          <div class="stat-s"><a href="https://www.mckinsey.com/featured-insights/diversity-and-inclusion/diversity-wins-how-inclusion-matters" target="_blank" style="color:var(--teal)">McKinsey: Diversity Wins 2020, refreshed 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--ink)">20%</div>
+          <div class="stat-l">Boost in employee engagement at companies with strong DEI practices — inclusive workplaces are 2× more likely to meet or exceed financial targets (Gallup / Deloitte)</div>
+          <div class="stat-s"><a href="https://diversity.com/post/business-case-for-dei" target="_blank" style="color:var(--teal)">Gallup 2023 / Deloitte DEI Revolution</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--red)">9.6%</div>
+          <div class="stat-l">Of women in high-income countries have jobs severely exposed to AI displacement — vs just 3.2% of men. AI amplifies existing gender vulnerability without deliberate DEI design</div>
+          <div class="stat-s"><a href="https://www.imf.org/-/media/files/publications/sdn/2026/english/sdnea2026001.pdf" target="_blank" style="color:var(--teal)">IMF SDN/2026/001 · Gender &amp; AI Exposure</a></div>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-h">Firm DEI Programme Benchmarks — All 10 Firms</div>
+        <div class="chart-sub">Named initiatives · Awards · Frameworks · Sources: WEF Lighthouse · Management Consulted · EvaluServe 2024–2026</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:0.74rem;min-width:600px;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--ink);background:var(--paper);">
+                <th style="padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-align:left;">Firm</th>
+                <th style="padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-align:left;">Signature Programme</th>
+                <th style="padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-align:left;">Key Metric / Award</th>
+                <th style="padding:0.6rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-align:left;">Framework / Tool</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line);background:white;">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">EY</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Women Fast Forward — accelerates gender parity; aligns with EU Women on Boards Directive</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://managementconsulted.com/top-10-dei-consulting-firms/" target="_blank" style="color:var(--teal)">WEF Global Parity Alliance recognition</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Global Equality Standard (GES) · Inclusiveness Advisory Council (IAC)</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:var(--paper);">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">McKinsey</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">All In — 48% female representation; top LGBTQ+ workplace recognition</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/how-we-help-clients/diversity-equity-and-inclusion" target="_blank" style="color:var(--teal)">WEF Lighthouse participant · CLA award-winning</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">DEI Maturity Assessment · Inclusion Incubator · People Process Debiasing</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:white;">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">Deloitte</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Inclusion Council — female senior rep at 26%; 6 inclusive leadership behaviours in performance criteria</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://www.weforum.org/stories/2023/01/dei-lighthouse-programme-heres-what-works-for-diversity-equity-inclusion-davos-2023/" target="_blank" style="color:var(--teal)">WEF DEI Lighthouse Award recipient</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">6C DEI Framework: Commitment, Courage, Curiosity, Collaboration, Cultural Intelligence, Cognizance of Bias</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:var(--paper);">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">PwC</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Leadership gender parity by 2030 — awarded Reiwa 5 Tokyo Women's Empowerment Promotion Award</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://www.weforum.org/stories/2023/01/dei-lighthouse-programme-heres-what-works-for-diversity-equity-inclusion-davos-2023/" target="_blank" style="color:var(--teal)">WEF DEI Lighthouse Award (PwC UK)</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Bias Analyzer · D&amp;I Maturity Model · ChatPwC trained on inclusive language prompts</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:white;">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">KPMG</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Global Inclusion, Diversity and Equity strategy; ERG-driven employee belonging programmes</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://managementconsulted.com/top-10-dei-consulting-firms/" target="_blank" style="color:var(--teal)">ISO/IEC 42001 — only Big 4 AI governance standard claim</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">10-pillar Trusted AI framework with bias-auditing embedded in all AI deployments</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:var(--paper);">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">Accenture</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Culture of Equality — targets 50% women and 30% underrepresented groups in workforce by 2025</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://managementconsulted.com/top-10-dei-consulting-firms/" target="_blank" style="color:var(--teal)">Named in Forbes Best Employers for Diversity 2025</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Pulse of Change Index · Bias-aware AI deployment methodology</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:white;">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">BCG</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Women at BCG — 45% female intake in 2024; integrates DEI across supply chain to customer experience</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://www.evalueserve.com/blog/embracing-diversity-and-inclusion-a-strategic-imperative-for-management-consulting-firms/" target="_blank" style="color:var(--teal)">19% more innovation revenue from diverse management — BCG's own research</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Systemic change methodology: embedding equity into every business process and talent strategy</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:var(--paper);">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">Bain</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Target 45% women in senior roles by 2025; DEI integrated into core mission and partner compensation</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://www.evalueserve.com/blog/embracing-diversity-and-inclusion-a-strategic-imperative-for-management-consulting-firms/" target="_blank" style="color:var(--teal)">DEI goals tied to partner pay — most accountable structure in MBB</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Leadership accountability + data transparency as primary DEI levers; supplier diversity tracking</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);background:white;">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">TCS</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">WEF DEI Lighthouse recognised programme (via Tata Steel); strong gender representation across 607K workforce</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://www.weforum.org/stories/2023/01/dei-lighthouse-programme-heres-what-works-for-diversity-equity-inclusion-davos-2023/" target="_blank" style="color:var(--teal)">WEF DEI Lighthouse recognition · Tata Group DEI Charter</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">AI-enabled bias auditing in talent processes; Tata Group DEI framework with board oversight</td>
+              </tr>
+              <tr style="background:var(--paper);">
+                <td style="padding:0.6rem 0.8rem;font-weight:700;">Infosys</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">ESG-integrated DEI goals; representation targets across gender and regional diversity in 328K workforce</td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)"><a href="https://infotechlead.com/software/infosys-fy26-revenue-hits-20-16-bn-as-ai-strategy-drives-14-9-bn-deal-wins-95361" target="_blank" style="color:var(--teal)">Named in India's Best Employers for Diversity 2024–2025</a></td>
+                <td style="padding:0.6rem 0.8rem;color:var(--mid)">Topaz AI used for bias-aware performance assessment; Springboard learning platform DEI modules</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ CULTURE & AWARDS ════════ -->
+    <div id="pnl-culture" class="sub-pnl" style="display:none">
+      <div class="eyebrow" style="margin-top:0.5rem;">Culture &amp; Awards · 2025–2026</div>
+      <h3 class="sh" style="font-size:1.5rem;">Firm Culture in the AI Era:<br>What Award Winners Do Differently</h3>
+      <p class="sl">AI disruption has revealed deep gaps in culture, leadership capability, and change readiness. The firms winning culture awards in 2025–2026 share one pattern: they treat culture not as a soft backdrop to AI, but as the primary enabler of transformation.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--gold)">2×</div>
+          <div class="stat-l">More likely to meet or exceed financial targets — inclusive, strong-culture firms vs peers. Culture is now measurable and investable (Deloitte Human Capital Trends 2025)</div>
+          <div class="stat-s"><a href="https://www.deloitte.com/us/en/services/consulting/about/future-of-work-ai.html" target="_blank" style="color:var(--teal)">Deloitte Global Human Capital Trends 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--teal)">70%</div>
+          <div class="stat-l">Of workers open to offloading AI work to free up time for creative and meaningful tasks — but only if firm culture makes this feel safe and purposeful</div>
+          <div class="stat-s"><a href="https://www.deloitte.com/us/en/services/consulting/about/future-of-work-ai.html" target="_blank" style="color:var(--teal)">Deloitte Global Human Capital Trends 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--ink)">86%</div>
+          <div class="stat-l">Of frontline workers need AI training but only 14% have received it — the culture gap is larger than the technology gap. Change culture must precede tool deployment</div>
+          <div class="stat-s"><a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank" style="color:var(--teal)">BCG AI Culture Research · Plus.ai 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--red)">87%</div>
+          <div class="stat-l">Of the time diverse teams make better decisions than uniform groups — cognitive diversity is the structural advantage AI cannot replicate (Harvard Business Review)</div>
+          <div class="stat-s"><a href="https://diversity.com/post/business-case-for-dei" target="_blank" style="color:var(--teal)">Harvard Business Review (cited in 40+ research reviews through 2026)</a></div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-no">01</div>
+          <div class="card-icon">🏆</div>
+          <div class="card-h">WEF DEI Lighthouse: Benchmarked Firm Winners</div>
+          <div class="card-b">The WEF DEI Lighthouse Programme identifies initiatives with significant, scalable, quantifiable and sustained impact. From benchmarked firms: <strong>EY</strong>, <strong>PwC UK</strong>, and <strong>TCS (via Tata Steel)</strong> are named recipients. BCG, McKinsey, and Salesforce appear in the "innovative design and execution" category. Five universal success factors: root-cause focus, process ownership, leadership accountability, data tracking, and scaling from pilot to system-wide.</div>
+          <span class="tag">WEF Lighthouse</span><span class="tag">Best Practice</span>
+          <div class="card-src"><a href="https://www.weforum.org/stories/2023/01/dei-lighthouse-programme-heres-what-works-for-diversity-equity-inclusion-davos-2023/" target="_blank">📄 WEF DEI Lighthouse Programme · weforum.org</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">02</div>
+          <div class="card-icon">🔄</div>
+          <div class="card-h">Deloitte: Scrapping Titles to Build Culture</div>
+          <div class="card-b">January 2026: Deloitte eliminated traditional consulting titles firm-wide across 181,500 US employees. Roles now carry specific "job family" and "sub-family" descriptors — a new "Leaders" class introduced. The move signals a deliberate culture shift: identity comes from expertise and impact, not hierarchy. Announced by US Chief People Officer Mo Reynolds, this is Deloitte's boldest cultural move since its 1990s partnership structure was established.</div>
+          <span class="tag">Org Design</span><span class="tag">Culture Shift</span>
+          <div class="card-src"><a href="https://fortune.com/2026/01/22/deloitte-job-title-change-ai-reshapes-big-4-accounting-consulting-firms/" target="_blank">📄 Fortune: Deloitte Scraps Job Titles · Jan 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">03</div>
+          <div class="card-icon">🌱</div>
+          <div class="card-h">BCG: Psychological Safety as Culture Strategy</div>
+          <div class="card-b">BCG's 1,200 AI ground troops are embedded across every practice — not as tool trainers but as cultural change agents who model AI-positive behaviour, surface anxiety, and create psychological safety for experimentation. BCG's finding: 86% of frontline workers need AI training but only 14% have received it — the cultural gap far exceeds the technical gap. BCG explicitly frames AI adoption as a culture change programme, not a technology rollout.</div>
+          <span class="tag">Change Culture</span><span class="tag">BCG Research</span>
+          <div class="card-src"><a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank">📄 Plus.ai · BCG AI Adoption Research 2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">04</div>
+          <div class="card-icon">💡</div>
+          <div class="card-h">Accenture: "Culture of Reinvention"</div>
+          <div class="card-b">Accenture's Pulse of Change Index tracks organisations on cultural readiness for AI at scale. Internally, Accenture restructured 11,000 roles while simultaneously hiring 77,000 AI professionals — managed through its "Culture of Reinvention" framework. The firm measures employee sentiment, AI tool adoption rates, and collaboration patterns to calibrate deployment pace. A firm that leads clients through AI culture change must model it at home — Accenture's proof of concept is itself.</div>
+          <span class="tag">Culture Measurement</span><span class="tag">Change Index</span>
+          <div class="card-src"><a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank">📄 Plus.ai · Accenture Pulse of Change 2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">05</div>
+          <div class="card-icon">🌐</div>
+          <div class="card-h">TCS &amp; Infosys: Culture at 600K+ Scale</div>
+          <div class="card-b"><strong>TCS:</strong> Its AI Hackathon attracted 280,000 participants — the world's largest internal AI innovation event, making AI literacy a shared competitive experience across 600K staff. <strong>Infosys:</strong> Springboard learning platform hosts 25,000+ courses. Founder NR Narayana Murthy's philosophy of "intellectual humility and continuous learning" baked into performance culture — now updated for the AI era with mandatory Topaz AI fluency assessments across all technical roles.</div>
+          <span class="tag">Scale Culture</span><span class="tag">Indian IT</span>
+          <div class="card-src"><a href="https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q3-fy-2026" target="_blank">📄 TCS Q3 FY26 Press Release · Infosys SEC 6-K FY2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">06</div>
+          <div class="card-icon">🎖️</div>
+          <div class="card-h">Award-Winning Practices: Named Case Studies</div>
+          <div class="card-b"><strong>Schneider Electric</strong> (WEF Lighthouse): global pay equity framework — pay gap held to under 1% globally, 50/40/30 gender balance. <strong>Randstad</strong> (WEF Lighthouse): 95% of apprenticeship graduates advanced into long-term roles with childcare + skills support for at-risk women. <strong>IBM:</strong> bias testing embedded in every AI product deployment. <strong>Spotify CHRO Anna Lundström:</strong> AI readiness + culture + personalised well-being — cited by IMD as the 2026 model CHRO approach.</div>
+          <span class="tag">Award Winners</span><span class="tag">Lighthouse Cases</span>
+          <div class="card-src"><a href="https://www.imd.org/ibyimd/artificial-intelligence/2026-ai-trends-what-leaders-need-to-know-to-stay-competitive/" target="_blank">📄 WEF Lighthouse · IMD 2026 AI Trends · WEF DEI Report</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ REWARDS & FUTURE SKILLS ════════ -->
+    <div id="pnl-rewards" class="sub-pnl" style="display:none">
+      <div class="eyebrow" style="margin-top:0.5rem;">Rewards &amp; Future Skills Policies · 2025–2026</div>
+      <h3 class="sh" style="font-size:1.5rem;">Rewarding the Future:<br>How Firms Incentivise AI Fluency</h3>
+      <p class="sl">AI fluency commands a 25% salary premium, drives promotion decisions, and is increasingly tied to variable pay, bonus structures, and career tracks across all 10 benchmarked firms. The reward landscape is being fundamentally redesigned.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--gold)">25%</div>
+          <div class="stat-l">Salary premium for workers with demonstrable AI skills over peers without them — AI fluency is now a visible, market-priced competency globally</div>
+          <div class="stat-s"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" style="color:var(--teal)">PwC AI Jobs Barometer 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--teal)">7×</div>
+          <div class="stat-l">Growth in demand for AI-fluent workers in 2 years — from 1M to 7M job postings explicitly requiring AI skills across all occupations</div>
+          <div class="stat-s"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" style="color:var(--teal)">McKinsey State of AI 2025 · LinkedIn 2025</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--ink)">75%</div>
+          <div class="stat-l">Of hiring processes will include formal AI proficiency certifications by 2027 — making AI fluency as standard as Excel competency once was</div>
+          <div class="stat-s"><a href="https://gloat.com/blog/ai-labor-market/" target="_blank" style="color:var(--teal)">Gartner 2027 Workforce Prediction · Gloat Mar 2026</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" style="color:var(--red)">4×</div>
+          <div class="stat-l">Higher productivity growth in AI-intensive industries vs non-AI-intensive industries — the business case for rewarding AI skill investment at the firm level</div>
+          <div class="stat-s"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank" style="color:var(--teal)">PwC 2026 AI Business Predictions</a></div>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-h">Firm Investment in AI Skills &amp; Rewards Infrastructure (2025–2026)</div>
+        <div class="chart-sub">Training commitments, headcount targets and policy initiatives · Plus.ai · Consulting Huber 2026 · Firm annual reports</div>
+        <div class="bar-row"><div class="bar-lbl">TCS — AI data centres + 600K staff</div><div class="bar-track"><div class="bar-fill bf-t" data-w="87">$6.5B infra · 600K trained</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">Accenture — AI workforce scale-up</div><div class="bar-track"><div class="bar-fill bf-i" data-w="100">$3B · 77K AI professionals</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">KPMG — Microsoft AI alliance</div><div class="bar-track"><div class="bar-fill bf-t" data-w="67">$2B alliance · ISO/IEC 42001</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">EY — EY.ai + NVIDIA partnership</div><div class="bar-track"><div class="bar-fill bf-g" data-w="47">$1.4B · +30% AI revenue FY25</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">PwC — AI training 75K employees</div><div class="bar-track"><div class="bar-fill bf-r" data-w="33">$1B over 3 years</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">Bain — OpenAI CoE + custom GPTs</div><div class="bar-track"><div class="bar-fill bf-r" data-w="20">19K+ GPTs · 13K consultants</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">BCG — AI ground troops programme</div><div class="bar-track"><div class="bar-fill bf-g" data-w="15">1,200 embedded change agents</div></div></div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-no">01</div>
+          <div class="card-icon">💰</div>
+          <div class="card-h">AI Fluency Tied to Compensation</div>
+          <div class="card-b">PwC's AI Jobs Barometer confirms a 25% wage premium for AI-skilled workers globally. McKinsey data shows AI-fluent professionals are 7 percentage points more likely to plan quitting in 3–6 months — they know their market value. Progressive firms are adding AI skill bonuses of $5K–$25K annually to retain early adopters and internally trained AI experts before they walk out the door with their capabilities.</div>
+          <span class="tag">Compensation Design</span><span class="tag">Retention</span>
+          <div class="card-src"><a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html" target="_blank">📄 PwC AI Jobs Barometer 2025 · McKinsey Future of Work Apr 2026</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">02</div>
+          <div class="card-icon">📋</div>
+          <div class="card-h">Mandatory AI Certification Policies</div>
+          <div class="card-b">By 2027, 75% of organisations will require AI proficiency certifications as a hiring standard (Gartner). In professional services, this is already emerging: McKinsey's mandatory 1-hour prompt training is the entry point, with advanced certification tracks linked to promotion eligibility. Accenture told employees explicitly: those unable to reskill using AI will be let go — the first major PS firm to make AI fluency a condition of continued employment.</div>
+          <span class="tag">Policy Design</span><span class="tag">Certification</span>
+          <div class="card-src"><a href="https://gloat.com/blog/ai-labor-market/" target="_blank">📄 Gartner / Gloat AI Labor Market Mar 2026 · Plus.ai</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">03</div>
+          <div class="card-icon">🎓</div>
+          <div class="card-h">Learning as a Reward: The Skills Currency Model</div>
+          <div class="card-b">Progressive firms treat access to premium learning as a form of compensation. BCG's AI Aspire (Andrew Ng partnership), Deloitte's AI Academy, McKinsey's Connected Leaders Academy, and Bain's OpenAI CoE access are positioned as career development rewards — not compliance training. In a fast-moving skill market, access to frontier AI training is as valuable as a salary band increase.</div>
+          <span class="tag">Learning as Reward</span><span class="tag">Skills Currency</span>
+          <div class="card-src"><a href="https://plusai.com/blog/how-consulting-firms-use-ai" target="_blank">📄 Plus.ai · Virtasant Feb 2026 · BCG AI Research</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">04</div>
+          <div class="card-icon">⚡</div>
+          <div class="card-h">Future Skills Policies — All 10 Firms</div>
+          <div class="card-b"><strong>EY:</strong> AI fluency in annual performance review criteria from FY26. <strong>McKinsey:</strong> +12% hiring exclusively AI-fluent profiles in 2026. <strong>PwC:</strong> 75K employees in mandatory AI training; AI skills in promotion criteria. <strong>KPMG:</strong> ISO/IEC 42001 certification as career differentiator. <strong>Accenture:</strong> AI reskilling as employment condition. <strong>TCS:</strong> AI skill completion linked to career band progression for 600K staff. <strong>Infosys:</strong> Topaz AI certification part of annual assessment for all technical staff. <strong>BCG:</strong> AI ground troop involvement linked to practice leadership fast-track. <strong>Bain:</strong> OpenAI CoE access as performance reward. <strong>Deloitte:</strong> New "Leaders" class tied to demonstrated AI-era capability.</div>
+          <span class="tag">Policy Benchmarks</span><span class="tag">10 Firms</span>
+          <div class="card-src"><a href="https://consulting-huber.com/ai-consulting-frameworks-compared.html" target="_blank">📄 Consulting Huber 2026 · FutureOfConsulting.ai Jan 2026 · Plus.ai</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">05</div>
+          <div class="card-icon">🔮</div>
+          <div class="card-h">The Skills Wallet: Emerging Policy Innovation</div>
+          <div class="card-b">2026's most forward-thinking policy innovation: the portable, verifiable "Skills Wallet" — a record of AI competencies that travels with the employee across roles, projects, and firms. Gloat's AI Talent Marketplace and LinkedIn's Skills Graph are the early infrastructure. By 2030, skills wallets could replace CVs as the primary hiring credential — making certified AI skills the primary driver of lifetime earnings and career optionality for professional services workers.</div>
+          <span class="tag">Future Policy</span><span class="tag">Skills Wallet</span>
+          <div class="card-src"><a href="https://gloat.com/blog/ai-workforce-trends/" target="_blank">📄 Gloat AI Workforce Trends Mar 2026 · LinkedIn Workplace Learning 2025 · WEF Future of Jobs 2025</a></div>
+        </div>
+        <div class="card">
+          <div class="card-no">06</div>
+          <div class="card-icon">🌐</div>
+          <div class="card-h">Pay Equity + AI: The Dual Imperative</div>
+          <div class="card-b">Schneider Electric's WEF Lighthouse-winning framework (pay gap under 1% globally, 50/40/30 gender balance) is the gold standard. In 2026, progressive PS firms are layering AI skill premiums onto pay equity frameworks — ensuring that AI-skill bonuses don't inadvertently widen existing gender and diversity pay gaps. McKinsey's People Process Debiasing tool is specifically designed to audit AI-era compensation decisions for structural bias.</div>
+          <span class="tag">Pay Equity</span><span class="tag">AI Bias in Rewards</span>
+          <div class="card-src"><a href="https://www.mckinsey.com/featured-insights/diversity-and-inclusion/diversity-equity-and-inclusion-lighthouses-2023" target="_blank">📄 McKinsey WEF DEI Lighthouse 2023 · Schneider Electric Case</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
      PANEL 9 — PREDICTIONS
 ═══════════════════════════════════════════════════════ -->
 <div id="predictions" class="panel">
@@ -923,53 +1398,64 @@ footer strong{color:var(--gold-lt);}
 <script>
 // ── Tab switching ──
 function showTab(id) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  // Find matching tab button
-  const btns = document.querySelectorAll('.tab-btn');
-  btns.forEach(b => { if(b.getAttribute('onclick').includes("'"+id+"'")) b.classList.add('active'); });
-  window.scrollTo({top:document.querySelector('.section-tabs').offsetTop - 50, behavior:'smooth'});
-  // Trigger any bar animations in newly shown panel
-  setTimeout(() => triggerBars(document.getElementById(id)), 100);
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  var panel = document.getElementById(id);
+  if (panel) panel.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').indexOf(id) > -1) {
+      b.classList.add('active');
+    }
+  });
+  var tabs = document.querySelector('.section-tabs');
+  if (tabs) window.scrollTo({top: tabs.offsetTop - 50, behavior: 'smooth'});
+  setTimeout(function() { triggerBars(document.getElementById(id)); }, 100);
 }
 
 function goto(id) { showTab(id); }
 
 // ── Industry dropdown ──
 function showIndustry(val) {
-  document.querySelectorAll('.industry-panel').forEach(p => p.classList.remove('active'));
-  if(val) {
-    const el = document.getElementById('ind-'+val);
-    if(el) el.classList.add('active');
+  document.querySelectorAll('.industry-panel').forEach(function(p) { p.classList.remove('active'); });
+  if (val) {
+    var el = document.getElementById('ind-' + val);
+    if (el) el.classList.add('active');
   } else {
-    document.getElementById('ind-default').classList.add('active');
+    var def = document.getElementById('ind-default');
+    if (def) def.classList.add('active');
   }
+}
+
+// ── People & Culture sub-panel switching ──
+function showSub(id) {
+  document.querySelectorAll('.sub-pnl').forEach(function(p) { p.style.display = 'none'; });
+  var el = document.getElementById('pnl-' + id);
+  if (el) el.style.display = 'block';
+  document.querySelectorAll('.spill').forEach(function(b) { b.classList.remove('active'); });
+  var pill = document.getElementById('sp-' + id);
+  if (pill) pill.classList.add('active');
+  setTimeout(function() {
+    if (el) {
+      el.querySelectorAll('.bar-fill[data-w]').forEach(function(b) { b.style.width = b.dataset.w + '%'; });
+      el.querySelectorAll('.skill-fill[data-h]').forEach(function(b) { b.style.height = b.dataset.h + '%'; });
+    }
+  }, 100);
 }
 
 // ── Animate bars ──
 function triggerBars(container) {
-  if(!container) return;
-  container.querySelectorAll('.bar-fill[data-w]').forEach(bar => {
-    bar.style.width = bar.dataset.w + '%';
-  });
-  container.querySelectorAll('.skill-fill[data-h]').forEach(bar => {
-    bar.style.height = bar.dataset.h + '%';
-  });
+  if (!container) return;
+  container.querySelectorAll('.bar-fill[data-w]').forEach(function(bar) { bar.style.width = bar.dataset.w + '%'; });
+  container.querySelectorAll('.skill-fill[data-h]').forEach(function(bar) { bar.style.height = bar.dataset.h + '%'; });
 }
 
-// ── Intersection Observer for all panels ──
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) triggerBars(e.target); });
-}, {threshold:0.1});
-
 // Trigger overview bars on load
-setTimeout(() => triggerBars(document.getElementById('overview')), 300);
+setTimeout(function() { triggerBars(document.getElementById('overview')); }, 300);
 
 // ── Scroll to top button ──
-const scrollBtn = document.getElementById('scrollBtn');
-window.addEventListener('scroll', () => {
-  scrollBtn.classList.toggle('visible', window.scrollY > 300);
+var scrollBtn = document.getElementById('scrollBtn');
+window.addEventListener('scroll', function() {
+  if (scrollBtn) scrollBtn.classList.toggle('visible', window.scrollY > 300);
 });
 </script>
 </body>
